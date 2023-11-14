@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 92835330}
   - component: {fileID: 92835329}
   - component: {fileID: 92835328}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,9 +305,12 @@ MonoBehaviour:
   baseSpeed: 10
   forwardFactor: 2
   maxSpeed: 30
-  minVelocity: 5
-  maxXRotation: 10
-  rotationFactor: 0.1
+  minVelocity: 10
+  maxXRotation: 20
+  rotationFactor: 0.015
+  minCloudSpeed: 1
+  maxCloudSpeed: 10
+  raycastDistance: 1
 --- !u!1 &1743565375
 GameObject:
   m_ObjectHideFlags: 0
