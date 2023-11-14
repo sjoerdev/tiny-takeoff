@@ -19,6 +19,13 @@ public class Glide : MonoBehaviour
     [Range(0f, 1f)] 
     [SerializeField] float rotationFactor;
 
+
+    //glide shit
+    
+    [SerializeField] private float minCloudSpeed;
+    [SerializeField] private float maxCloudSpeed;
+    [SerializeField] private float raycastDistance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +63,23 @@ public class Glide : MonoBehaviour
         if( transform.InverseTransformDirection(rb.velocity).z <= minVelocity)
         {
             rb.AddRelativeForce(Vector3.forward * minVelocity, ForceMode.VelocityChange);
+        }
+
+        //skit over the clouds
+        
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, Vector3.down, out hit))
+        {
+            float dot = Vector3.Dot(transform.rotation * Vector3.up, hit.normal);
+            dot += 1f;
+            dot /= 2f;
+
+            float speed = (rb.velocity.magnitude - minCloudSpeed) / (maxCloudSpeed - minCloudSpeed);
+
+            Mathf.Clamp(speed, 0,1);
+
+            Quaternion newRotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(hit.normal), dot);
+            transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, speed);
         }
     }
 
