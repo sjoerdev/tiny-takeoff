@@ -15,6 +15,9 @@ public class Glide : MonoBehaviour
 
     float xRotation;
     float yRotation;
+    [SerializeField] float maxXRotation;
+    [Range(0f, 1f)] 
+    [SerializeField] float rotationFactor;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +32,10 @@ public class Glide : MonoBehaviour
         
         yRotation += 30 * Input.GetAxis("Horizontal") * Time.deltaTime;
 
-
+        if(xRotation < maxXRotation)
+        {
+            xRotation = Mathf.Lerp(xRotation, maxXRotation, rotationFactor);
+        }
 
         float mappedPitch = Mathf.Sin(transform.rotation.eulerAngles.x * Mathf.Deg2Rad) * forwardFactor;
 
@@ -43,13 +49,14 @@ public class Glide : MonoBehaviour
         {
             currentForwardSpeed = 0f;
         }
-        
-
-        
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation,0);
-        
         rb.AddRelativeForce(Vector3.forward * currentForwardSpeed);
+
+        if( transform.InverseTransformDirection(rb.velocity).z <= minVelocity)
+        {
+            rb.AddRelativeForce(Vector3.forward * minVelocity, ForceMode.VelocityChange);
+        }
     }
 
     // Update is called once per frame
