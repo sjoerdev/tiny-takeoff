@@ -247,7 +247,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 100
   height: 100
-  scale: 5
+  scale: 13
+  octaves: 4
+  persistance: 0.5
+  lacunatity: 2
+  seed: 85485
+  offset: {x: 0, y: 0}
   autoUpdate: 1
 --- !u!4 &1217458150
 Transform:
