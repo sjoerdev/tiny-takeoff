@@ -26,6 +26,7 @@ public class Glide : MonoBehaviour
     [SerializeField] private float minCloudSpeed;
     [SerializeField] private float maxCloudSpeed;
     [SerializeField] private float raycastDistance;
+    [SerializeField] private float raycastHeightStart;
     [SerializeField] private float cloudForce;
     [SerializeField] private LayerMask terrainlayer;
     // Start is called before the first frame update
@@ -70,7 +71,8 @@ public class Glide : MonoBehaviour
         //skit over the clouds
         
         RaycastHit hit;
-        if(Physics.SphereCast(transform.position + Vector3.up * raycastDistance / 2, raycastDistance / 2, Vector3.down, out hit, raycastDistance, terrainlayer))
+        Vector3 raycastDir = transform.rotation * Vector3.down;
+        if(Physics.SphereCast(transform.position + -raycastDir * raycastHeightStart, raycastDistance / 2, raycastDir, out hit, raycastDistance, terrainlayer))
         {
             Debug.Log("in cloud");
 
@@ -78,7 +80,7 @@ public class Glide : MonoBehaviour
 
             Vector3 forcePosition = transform.position - hit.point;
 
-            rb.AddForce(forcePosition.normalized * cloudForce * speed);
+            rb.AddForce(forcePosition.normalized * cloudForce * speed, ForceMode.Acceleration);
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity), 0.05f);
             xRotation = transform.rotation.eulerAngles.x;
             yRotation = transform.rotation.eulerAngles.y;
