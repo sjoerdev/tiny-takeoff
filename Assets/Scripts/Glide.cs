@@ -73,6 +73,9 @@ public class Glide : MonoBehaviour
         {
 
             rb.AddForce(hit.normal * cloudForce);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity), 0.05f);
+            xRotation = transform.rotation.eulerAngles.x;
+            yRotation = transform.rotation.eulerAngles.y;
         }
     }
 
