@@ -69,9 +69,8 @@ public class Glide : MonoBehaviour
         //skit over the clouds
         
         RaycastHit hit;
-        if(Physics.SphereCast(transform.position + Vector3.up * raycastDistance/2, raycastDistance/2, Vector3.down, out hit, raycastDistance, terrainlayer))
+        if(Physics.SphereCast(transform.position + Vector3.up * raycastDistance/2, raycastDistance / 2, Vector3.down, out hit, raycastDistance, terrainlayer))
         {
-            Debug.Log("cloud check");
 
             rb.AddForce(hit.normal * cloudForce);
         }
