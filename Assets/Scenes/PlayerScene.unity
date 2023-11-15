@@ -1469,8 +1469,9 @@ MonoBehaviour:
   rotationFactor: 0.02
   minCloudSpeed: 10
   maxCloudSpeed: 200
-  raycastDistance: 20
-  cloudForce: 150
+  raycastDistance: 70
+  raycastHeightStart: 60
+  cloudForce: 200
   terrainlayer:
     serializedVersion: 2
     m_Bits: 8
