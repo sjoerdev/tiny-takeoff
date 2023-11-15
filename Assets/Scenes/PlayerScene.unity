@@ -1324,7 +1324,7 @@ MonoBehaviour:
   minCloudSpeed: 5
   maxCloudSpeed: 100
   raycastDistance: 20
-  cloudForce: 150
+  cloudForce: 200
   terrainlayer:
     serializedVersion: 2
     m_Bits: 8
