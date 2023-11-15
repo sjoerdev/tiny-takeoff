@@ -271,7 +271,8 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7884956948034341817, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -308,9 +309,13 @@ MonoBehaviour:
   minVelocity: 10
   maxXRotation: 20
   rotationFactor: 0.015
-  minCloudSpeed: 1
-  maxCloudSpeed: 10
-  raycastDistance: 1
+  minCloudSpeed: 5
+  maxCloudSpeed: 100
+  raycastDistance: 20
+  cloudForce: 200
+  terrainlayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1743565375
 GameObject:
   m_ObjectHideFlags: 0
