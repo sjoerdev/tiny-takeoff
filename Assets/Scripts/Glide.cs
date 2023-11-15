@@ -72,10 +72,13 @@ public class Glide : MonoBehaviour
         RaycastHit hit;
         if(Physics.SphereCast(transform.position + Vector3.up * raycastDistance / 2, raycastDistance / 2, Vector3.down, out hit, raycastDistance, terrainlayer))
         {
+            Debug.Log("in cloud");
+
             float speed = (rb.velocity.magnitude - minCloudSpeed) / (maxCloudSpeed - minCloudSpeed);
 
-            Debug.Log("in cloud");
-            rb.AddForce(hit.normal * cloudForce * speed);
+            Vector3 forcePosition = transform.position - hit.point;
+
+            rb.AddForce(forcePosition.normalized * cloudForce * speed);
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity), 0.05f);
             xRotation = transform.rotation.eulerAngles.x;
             yRotation = transform.rotation.eulerAngles.y;
