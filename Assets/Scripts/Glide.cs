@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using UnityEditor;
 using UnityEngine;
 
 public class Glide : MonoBehaviour
@@ -69,10 +70,12 @@ public class Glide : MonoBehaviour
         //skit over the clouds
         
         RaycastHit hit;
-        if(Physics.SphereCast(transform.position + Vector3.up * raycastDistance/2, raycastDistance / 2, Vector3.down, out hit, raycastDistance, terrainlayer))
+        if(Physics.SphereCast(transform.position + Vector3.up * raycastDistance / 2, raycastDistance / 2, Vector3.down, out hit, raycastDistance, terrainlayer))
         {
+            float speed = (rb.velocity.magnitude - minCloudSpeed) / (maxCloudSpeed - minCloudSpeed);
 
-            rb.AddForce(hit.normal * cloudForce);
+            Debug.Log("in cloud");
+            rb.AddForce(hit.normal * cloudForce * speed);
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity), 0.05f);
             xRotation = transform.rotation.eulerAngles.x;
             yRotation = transform.rotation.eulerAngles.y;
