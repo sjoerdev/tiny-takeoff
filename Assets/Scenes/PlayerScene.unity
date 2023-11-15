@@ -1470,7 +1470,7 @@ MonoBehaviour:
   minCloudSpeed: 10
   maxCloudSpeed: 200
   raycastDistance: 70
-  raycastHeightStart: 60
+  raycastHeightStart: 65
   cloudForce: 200
   terrainlayer:
     serializedVersion: 2
