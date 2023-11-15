@@ -8,6 +8,8 @@ public class MapGenerator : MonoBehaviour
     public int height;
     public float scale;
 
+    public float meshHeightMultiplier;
+
     public int octaves;
 
     [Range(0, 1)]
@@ -22,9 +24,8 @@ public class MapGenerator : MonoBehaviour
     public void GenerateMap()
     {
         float[,] noiseMap = Noise.GenerateNoiseMap(width, height, seed, scale, octaves, persistance, lacunatity, offset);
-    
         MapDisplay display = FindObjectOfType<MapDisplay>();
-        display.DrawNoiseMap(noiseMap);
+        display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier));
     }
 
     void OnValidate()
