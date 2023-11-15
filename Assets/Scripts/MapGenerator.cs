@@ -6,9 +6,11 @@ public class MapGenerator : MonoBehaviour
 {
     public int width;
     public int height;
+    public float depth;
+
     public float scale;
 
-    public float meshHeightMultiplier;
+    public GameObject Mesh;
 
     public int octaves;
 
@@ -25,7 +27,7 @@ public class MapGenerator : MonoBehaviour
     {
         float[,] noiseMap = Noise.GenerateNoiseMap(width, height, seed, scale, octaves, persistance, lacunatity, offset);
         MapDisplay display = FindObjectOfType<MapDisplay>();
-        display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier));
+        display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, depth));
     }
 
     void OnValidate()
@@ -34,5 +36,7 @@ public class MapGenerator : MonoBehaviour
         if (height < 1) height = 1;
         if (lacunatity < 1) lacunatity = 1;
         if (octaves < 0) octaves = 0;
+
+        Mesh.transform.localScale = new Vector3(width, depth, height);
     }
 }
