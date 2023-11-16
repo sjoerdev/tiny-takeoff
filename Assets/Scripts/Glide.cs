@@ -13,7 +13,6 @@ public class Glide : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float minVelocity;
     private float currentForwardSpeed;
-    float forwardVelocity;
 
     float xRotation;
     float yRotation;
@@ -34,9 +33,6 @@ public class Glide : MonoBehaviour
 
     //for testing
     public Vector3 slopeDir;
-
-    RaycastHit forwardHit;
-    RaycastHit downHit;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,11 +45,6 @@ public class Glide : MonoBehaviour
         xRotation += 30 * Input.GetAxis("Vertical") * Time.deltaTime;
         
         yRotation += 50 * Input.GetAxis("Horizontal") * Time.deltaTime;
-
-        if(xRotation < maxXRotation)
-        {
-            xRotation = Mathf.Lerp(xRotation, maxXRotation, rotationFactor);
-        }
 
         float mappedPitch = Mathf.Sin(transform.rotation.eulerAngles.x * Mathf.Deg2Rad) * forwardFactor;
 
@@ -76,52 +67,17 @@ public class Glide : MonoBehaviour
             rb.AddRelativeForce(Vector3.forward * minVelocity, ForceMode.VelocityChange);
         }
 
-        ThirdCloudMethod();
+        CloudSkit();
     }
 
-    private void FirstCloudMethod()
+    private void CloudSkit()
     {
         //skit over the clouds
         
-        RaycastHit hit;
-        Vector3 raycastDir = transform.rotation *new Vector3(0,-1,1);
-        if(Physics.SphereCast(transform.position + -raycastDir * raycastHeightStart, raycastDistance / 2, raycastDir, out hit, raycastDistance, terrainlayer))
-        {
-            Debug.Log("in cloud");
-
-            float speed = (rb.velocity.magnitude - minCloudSpeed) / (maxCloudSpeed - minCloudSpeed);
-
-            rb.AddForce(hit.normal * cloudForce * speed, ForceMode.Acceleration);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity), 0.05f);
-            xRotation = transform.rotation.eulerAngles.x;
-        }
-    }
-
-    private void NewCloudMethod()
-    {
-        //skit over the clouds
-        
-        RaycastHit hit;
-        Vector3 raycastDir = transform.rotation *new Vector3(0,-1,1);
-        if(Physics.SphereCast(transform.position + -raycastDir * raycastHeightStart, raycastDistance / 2, raycastDir, out hit, raycastDistance, terrainlayer))
-        {
-            Debug.Log("in cloud");
-
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(Vector3.zero, hit.normal), 0.5f);
-            rb.AddRelativeForce(Vector3.forward * cloudForce, ForceMode.Acceleration);
-            xRotation = transform.rotation.eulerAngles.x;
-            yRotation = transform.rotation.eulerAngles.y;
-        }
-    }
-
-        private void ThirdCloudMethod()
-    {
-        //skit over the clouds
-        
-        //RaycastHit forwardHit;
+        RaycastHit forwardHit;
         Vector3 forwardDir = rb.velocity.normalized;
 
-        //RaycastHit downHit;
+        RaycastHit downHit;
         Vector3 downDir = transform.rotation * Vector3.down;
 
         
@@ -142,7 +98,7 @@ public class Glide : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity), 0.05f);
             xRotation = transform.rotation.eulerAngles.x;
 
-            rb.AddForce(transform.forward * cloudForce, ForceMode.Acceleration);
+            rb.AddForce(transform.forward * cloudForce, ForceMode.VelocityChange);
             }
         }
     }
@@ -162,10 +118,5 @@ public class Glide : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, transform.position + slopeDir * 50);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(forwardHit.point,10);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(downHit.point,10);
     }
 }

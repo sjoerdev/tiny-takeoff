@@ -564,19 +564,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 655499587419071289, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9848078
+      value: 0.6963643
       objectReference: {fileID: 0}
     - target: {fileID: 655499587419071289, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.17364816
+      value: 0.12278779
       objectReference: {fileID: 0}
     - target: {fileID: 655499587419071289, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.6963643
       objectReference: {fileID: 0}
     - target: {fileID: 655499587419071289, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.12278779
       objectReference: {fileID: 0}
     - target: {fileID: 655499587419071289, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -584,7 +584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 655499587419071289, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 655499587419071289, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -645,12 +645,13 @@ MonoBehaviour:
   rotationFactor: 0.02
   minCloudSpeed: 10
   maxCloudSpeed: 200
-  raycastDistance: 10
+  raycastDistance: 20
   raycastHeightStart: 0
-  cloudForce: 200
+  cloudForce: 2
   terrainlayer:
     serializedVersion: 2
     m_Bits: 8
+  slopeDir: {x: 0, y: -10, z: 10}
 --- !u!4 &1324190972 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 655499587419071289, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
