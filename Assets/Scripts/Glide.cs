@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -68,27 +69,80 @@ public class Glide : MonoBehaviour
             rb.AddRelativeForce(Vector3.forward * minVelocity, ForceMode.VelocityChange);
         }
 
+        ThirdCloudMethod();
+    }
+
+    private void FirstCloudMethod()
+    {
         //skit over the clouds
         
         RaycastHit hit;
-        Vector3 raycastDir = transform.rotation * Vector3.down;
+        Vector3 raycastDir = transform.rotation *new Vector3(0,-1,1);
         if(Physics.SphereCast(transform.position + -raycastDir * raycastHeightStart, raycastDistance / 2, raycastDir, out hit, raycastDistance, terrainlayer))
         {
             Debug.Log("in cloud");
 
             float speed = (rb.velocity.magnitude - minCloudSpeed) / (maxCloudSpeed - minCloudSpeed);
 
-            Vector3 forcePosition = transform.position - hit.point;
-
-            rb.AddForce(forcePosition.normalized * cloudForce * speed, ForceMode.Acceleration);
+            rb.AddForce(hit.normal * cloudForce * speed, ForceMode.Acceleration);
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity), 0.05f);
             xRotation = transform.rotation.eulerAngles.x;
         }
     }
 
+    private void NewCloudMethod()
+    {
+        //skit over the clouds
+        
+        RaycastHit hit;
+        Vector3 raycastDir = transform.rotation *new Vector3(0,-1,1);
+        if(Physics.SphereCast(transform.position + -raycastDir * raycastHeightStart, raycastDistance / 2, raycastDir, out hit, raycastDistance, terrainlayer))
+        {
+            Debug.Log("in cloud");
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(Vector3.zero, hit.normal), 0.5f);
+            rb.AddRelativeForce(Vector3.forward * cloudForce, ForceMode.Acceleration);
+            xRotation = transform.rotation.eulerAngles.x;
+            yRotation = transform.rotation.eulerAngles.y;
+        }
+    }
+
+        private void ThirdCloudMethod()
+    {
+        //skit over the clouds
+        
+        RaycastHit forwardHit;
+        Vector3 forwardDir = rb.velocity;
+
+        RaycastHit downHit;
+        Vector3 downDir = transform.rotation * Vector3.down;
+
+        
+        if(Physics.SphereCast(transform.position + -forwardDir * raycastHeightStart, raycastDistance / 2, forwardDir, out forwardHit, rb.velocity.magnitude, terrainlayer))
+        {
+            if(Physics.SphereCast(transform.position + -downDir * raycastHeightStart, raycastDistance / 2, downDir, out downHit, raycastDistance, terrainlayer))
+            Debug.Log("in cloud");
+
+            Vector3 slopeDir = forwardHit.point - downHit.point;
+
+            float speed = rb.velocity.magnitude;
+            rb.velocity = Vector3.Lerp(rb.velocity, slopeDir.normalized * speed,0.3f);
+
+            rb.AddRelativeForce(Vector3.forward * cloudForce, ForceMode.Acceleration);
+            xRotation = transform.rotation.eulerAngles.x;
+            yRotation = transform.rotation.eulerAngles.y;
+        }
+    }
+
+
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, transform.position + transform.rotation *new Vector3(0,-1,1)*raycastDistance);
     }
 }
