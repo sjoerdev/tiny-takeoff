@@ -30,6 +30,13 @@ public class Glide : MonoBehaviour
     [SerializeField] private float raycastHeightStart;
     [SerializeField] private float cloudForce;
     [SerializeField] private LayerMask terrainlayer;
+
+
+    //for testing
+    public Vector3 slopeDir;
+
+    RaycastHit forwardHit;
+    RaycastHit downHit;
     // Start is called before the first frame update
     void Start()
     {
@@ -111,28 +118,36 @@ public class Glide : MonoBehaviour
     {
         //skit over the clouds
         
-        RaycastHit forwardHit;
-        Vector3 forwardDir = rb.velocity;
+        //RaycastHit forwardHit;
+        Vector3 forwardDir = rb.velocity.normalized;
 
-        RaycastHit downHit;
+        //RaycastHit downHit;
         Vector3 downDir = transform.rotation * Vector3.down;
 
         
-        if(Physics.SphereCast(transform.position + -forwardDir * raycastHeightStart, raycastDistance / 2, forwardDir, out forwardHit, rb.velocity.magnitude, terrainlayer))
+        if(Physics.Raycast(transform.position, forwardDir, out forwardHit, rb.velocity.magnitude, terrainlayer))
         {
-            if(Physics.SphereCast(transform.position + -downDir * raycastHeightStart, raycastDistance / 2, downDir, out downHit, raycastDistance, terrainlayer))
+            if(Physics.Raycast(transform.position, downDir, out downHit, raycastDistance, terrainlayer))
+            {
+
             Debug.Log("in cloud");
 
-            Vector3 slopeDir = forwardHit.point - downHit.point;
+            
+
+            slopeDir = forwardHit.point - downHit.point;
 
             float speed = rb.velocity.magnitude;
-            rb.velocity = Vector3.Lerp(rb.velocity, slopeDir.normalized * speed,0.3f);
+            rb.velocity = Vector3.Lerp(rb.velocity, slopeDir.normalized * speed,0.4f);
 
-            rb.AddRelativeForce(Vector3.forward * cloudForce, ForceMode.Acceleration);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity), 0.05f);
             xRotation = transform.rotation.eulerAngles.x;
-            yRotation = transform.rotation.eulerAngles.y;
+
+            rb.AddForce(transform.forward * cloudForce, ForceMode.Acceleration);
+            }
         }
     }
+
+    
 
 
     // Update is called once per frame
@@ -144,5 +159,13 @@ public class Glide : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + transform.rotation *new Vector3(0,-1,1)*raycastDistance);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + slopeDir * 50);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(forwardHit.point,10);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(downHit.point,10);
     }
 }
