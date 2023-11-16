@@ -9,7 +9,7 @@ public class LightingManager : MonoBehaviour
     [SerializeField] private Light directionalLight;
     [SerializeField] private LightingPreset preset;
     //Variables
-    [SerializeField, Range(0, 24)] private float timeOfDay;
+    [SerializeField, Range(0, 48)] private float timeOfDay;
 
     private void Update()
     {
@@ -19,8 +19,8 @@ public class LightingManager : MonoBehaviour
         if (Application.isPlaying)
         {
             timeOfDay += Time.deltaTime;
-            timeOfDay %= 24; //Clamp between 0-24
-            UpdateLighting(timeOfDay / 24);
+            timeOfDay %= 48; //Clamp between 0-24
+            UpdateLighting(timeOfDay / 48);
         }
         
     }

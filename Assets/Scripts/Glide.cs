@@ -19,7 +19,7 @@ public class Glide : MonoBehaviour
     [SerializeField] float maxXRotation;
     [Range(0f, 1f)] 
     [SerializeField] float rotationFactor;
-
+    [SerializeField] private float vectorThrust = 20f;
 
     //glide shit
     
@@ -86,8 +86,6 @@ public class Glide : MonoBehaviour
             if(Physics.Raycast(transform.position, downDir, out downHit, raycastDistance, terrainlayer))
             {
 
-            Debug.Log("in cloud");
-
             
 
             slopeDir = forwardHit.point - downHit.point;
@@ -119,4 +117,11 @@ public class Glide : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, transform.position + slopeDir * 50);
     }
+
+    public void WindVector()
+    {
+        rb.AddForce(transform.forward * vectorThrust, ForceMode.Impulse);
+    }
+
+
 }
