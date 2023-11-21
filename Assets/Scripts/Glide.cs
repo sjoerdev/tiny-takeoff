@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class Glide : MonoBehaviour
 {
+    [Header("glide")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float baseSpeed;
     [SerializeField] private float forwardFactor;
@@ -16,19 +17,21 @@ public class Glide : MonoBehaviour
 
     float xRotation;
     float yRotation;
-    [SerializeField] float maxXRotation;
+
+
+    [Header("Controls")]
     [Range(0f, 1f)] 
     [SerializeField] float rotationFactor;
     [SerializeField] private float xRotationForce = 30;
     
     [SerializeField] private float yRotationForce = 50;
+
+    [Header("WindVector")]
+    //windvector
     [SerializeField] private float vectorThrust = 20f;
 
-
-    //glide shit
-    
-    [SerializeField] private float minCloudSpeed;
-    [SerializeField] private float maxCloudSpeed;
+    [Header("Cloud Skitting settings")]
+    //cloud skit parameters
     [SerializeField] private float raycastDistance;
     [SerializeField] private float raycastHeightStart;
     [SerializeField] private float cloudForce;
@@ -37,8 +40,6 @@ public class Glide : MonoBehaviour
     [SerializeField] private float cloudSkitRotationLerp = 0.4f;
 
 
-    //for testing
-    public Vector3 slopeDir;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,11 +48,12 @@ public class Glide : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        //controlls
         xRotation += xRotationForce * Input.GetAxis("Vertical") * Time.deltaTime;
         
         yRotation += yRotationForce * Input.GetAxis("Horizontal") * Time.deltaTime;
 
+        //if player is looking down its positive, if player is looking up its negative
         float mappedPitch = Mathf.Sin(transform.rotation.eulerAngles.x * Mathf.Deg2Rad) * forwardFactor;
 
 
@@ -65,20 +67,23 @@ public class Glide : MonoBehaviour
             currentForwardSpeed = 0f;
         }
 
+        //force in direction player is looking
         transform.rotation = Quaternion.Euler(xRotation, yRotation,0);
         rb.AddRelativeForce(Vector3.forward * currentForwardSpeed);
 
+        //minimum force so player always goes forward
         if( transform.InverseTransformDirection(rb.velocity).z <= minVelocity)
         {
             rb.AddRelativeForce(Vector3.forward * minVelocity, ForceMode.VelocityChange);
         }
 
+        //skitting over clouds
         CloudSkit();
     }
 
     private void CloudSkit()
     {
-        //skit over the clouds
+        
         
         RaycastHit forwardHit;
         Vector3 forwardDir = rb.velocity.normalized;
@@ -91,37 +96,26 @@ public class Glide : MonoBehaviour
         {
             if(Physics.Raycast(transform.position, downDir, out downHit, raycastDistance, terrainlayer))
             {
+                //get slope
+                Vector3 slopeDir = forwardHit.point - downHit.point;
 
-            
+                //lerp rb velocity in direction of slope
+                float speed = rb.velocity.magnitude;
+                rb.velocity = Vector3.Lerp(rb.velocity, slopeDir.normalized * speed,0.4f);
 
-            slopeDir = forwardHit.point - downHit.point;
+                //rotate player in direction of slope
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity), 0.05f);
+                xRotation = transform.rotation.eulerAngles.x;
 
-            float speed = rb.velocity.magnitude;
-            rb.velocity = Vector3.Lerp(rb.velocity, slopeDir.normalized * speed,0.4f);
-
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity), 0.05f);
-            xRotation = transform.rotation.eulerAngles.x;
-
-            rb.AddForce(transform.forward * cloudForce, ForceMode.VelocityChange);
+                //add force forward so the player can climb up
+                rb.AddForce(transform.forward * cloudForce, ForceMode.VelocityChange);
             }
         }
-    }
-
-    
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + transform.rotation *new Vector3(0,-1,1)*raycastDistance);
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + slopeDir * 50);
     }
 
     public void WindVector()
