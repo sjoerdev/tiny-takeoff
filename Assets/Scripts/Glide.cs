@@ -19,7 +19,11 @@ public class Glide : MonoBehaviour
     [SerializeField] float maxXRotation;
     [Range(0f, 1f)] 
     [SerializeField] float rotationFactor;
+    [SerializeField] private float xRotationForce = 30;
+    
+    [SerializeField] private float yRotationForce = 50;
     [SerializeField] private float vectorThrust = 20f;
+
 
     //glide shit
     
@@ -29,6 +33,8 @@ public class Glide : MonoBehaviour
     [SerializeField] private float raycastHeightStart;
     [SerializeField] private float cloudForce;
     [SerializeField] private LayerMask terrainlayer;
+    [Range(0f,1f)]
+    [SerializeField] private float cloudSkitRotationLerp = 0.4f;
 
 
     //for testing
@@ -42,9 +48,9 @@ public class Glide : MonoBehaviour
     private void FixedUpdate()
     {
 
-        xRotation += 30 * Input.GetAxis("Vertical") * Time.deltaTime;
+        xRotation += xRotationForce * Input.GetAxis("Vertical") * Time.deltaTime;
         
-        yRotation += 50 * Input.GetAxis("Horizontal") * Time.deltaTime;
+        yRotation += yRotationForce * Input.GetAxis("Horizontal") * Time.deltaTime;
 
         float mappedPitch = Mathf.Sin(transform.rotation.eulerAngles.x * Mathf.Deg2Rad) * forwardFactor;
 
