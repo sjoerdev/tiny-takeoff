@@ -37,7 +37,9 @@ public class Glide : MonoBehaviour
     [SerializeField] private float cloudForce;
     [SerializeField] private LayerMask terrainlayer;
     [Range(0f,1f)]
-    [SerializeField] private float cloudSkitRotationLerp = 0.4f;
+    [SerializeField] private float cloudSkitRotationLerp = 0.05f;
+    [Range(0f,1f)]
+    [SerializeField] private float cloudSkitSpeedLerp = 0.4f;
 
 
     // Start is called before the first frame update
@@ -101,10 +103,10 @@ public class Glide : MonoBehaviour
 
                 //lerp rb velocity in direction of slope
                 float speed = rb.velocity.magnitude;
-                rb.velocity = Vector3.Lerp(rb.velocity, slopeDir.normalized * speed,0.4f);
+                rb.velocity = Vector3.Lerp(rb.velocity, slopeDir.normalized * speed,cloudSkitSpeedLerp);
 
                 //rotate player in direction of slope
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity), 0.05f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity), cloudSkitRotationLerp);
                 xRotation = transform.rotation.eulerAngles.x;
 
                 //add force forward so the player can climb up

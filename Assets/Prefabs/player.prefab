@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8056896193381326861}
   - component: {fileID: 5057440665914381713}
   - component: {fileID: 6907035381744792546}
-  m_Layer: 0
+  - component: {fileID: 3658615075303696610}
+  m_Layer: 6
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +33,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 200, z: 1.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1021867244399150407}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1781769191187235571
@@ -63,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c0c71681e7d0d2847876f76677e637f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,3 +137,62 @@ CapsuleCollider:
   m_Height: 2.220446e-16
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3658615075303696610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3039114256249945450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb432950bd1291946b413fcdcdb7dc88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 5057440665914381713}
+  baseSpeed: 10
+  forwardFactor: 2
+  maxSpeed: 30
+  minVelocity: 10
+  rotationFactor: 0.02
+  xRotationForce: 30
+  yRotationForce: 50
+  vectorThrust: 1000
+  raycastDistance: 20
+  raycastHeightStart: 0
+  cloudForce: 2
+  terrainlayer:
+    serializedVersion: 2
+    m_Bits: 8
+  cloudSkitRotationLerp: 0.4
+--- !u!1 &6737253144317823603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1021867244399150407}
+  m_Layer: 6
+  m_Name: camPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1021867244399150407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6737253144317823603}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 10, z: -20}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 655499587419071289}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
