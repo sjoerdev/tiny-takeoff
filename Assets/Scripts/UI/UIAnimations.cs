@@ -138,8 +138,23 @@ public class UIAnimations : MonoBehaviour
     private IEnumerator ShowBottomUI()
     {
         float passedTime = 0f;
+        Vector3 position = new Vector3();
+        while(passedTime < bottomUIAnimationTime)
+        {
+            passedTime += Time.deltaTime;
+            position = bottomUI.transform.position;
+            position.y = Mathf.Lerp(bottomUINormalY,bottomUIMovedY,passedTime/bottomUIAnimationTime);
+            bottomUI.transform.position = position;
+            yield return new WaitForEndOfFrame();
+        }
+        position.y = bottomUIMovedY;
+        bottomUI.transform.position = position;
 
-        passedTime = 0;
+        yield return null;
+    }
+    private IEnumerator HideBottomUI()
+    {
+        float passedTime = 0f;
         Vector3 position = new Vector3();
         while(passedTime < bottomUIAnimationTime)
         {
@@ -151,25 +166,6 @@ public class UIAnimations : MonoBehaviour
         }
         position.y = bottomUINormalY;
         bottomUI.transform.position = position;
-
-        yield return null;
-    }
-    private IEnumerator HideBottomUI()
-    {
-        float passedTime = 0f;
-        passedTime = 0f;
-        Vector3 position = new Vector3();
-        while(passedTime < bottomUIAnimationTime)
-        {
-            passedTime += Time.deltaTime;
-            position = bottomUI.transform.position;
-            position.y = Mathf.Lerp(bottomUINormalY,bottomUIMovedY,passedTime/bottomUIAnimationTime);
-            topUI.transform.position = position;
-            yield return new WaitForEndOfFrame();
-        }
-        position.y = bottomUIMovedY;
-        bottomUI.transform.position = position;
-
 
         yield return null;
     }
