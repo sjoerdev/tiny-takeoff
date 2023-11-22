@@ -4,6 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Glide : MonoBehaviour
 {
@@ -20,11 +21,19 @@ public class Glide : MonoBehaviour
 
 
     [Header("Controls")]
+    PlayerControlls playerControlls;
+    private InputAction move;
+    private InputAction fire;
     [Range(0f, 1f)] 
     [SerializeField] float rotationFactor;
     [SerializeField] private float xRotationForce = 30;
     
     [SerializeField] private float yRotationForce = 50;
+    [Range(0f,1f)]
+    [SerializeField] private float rotationForceLerpStrenght = 0.9f;
+
+    private float lerpedXRotationForce;
+    private float lerpedYRotationForce;
 
     [Header("WindVector")]
     //windvector
@@ -42,18 +51,42 @@ public class Glide : MonoBehaviour
     [SerializeField] private float cloudSkitSpeedLerp = 0.4f;
 
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        playerControlls = new PlayerControlls();
+    }
+
+    void OnEnable()
+    {
+        move = playerControlls.Player.Move;
+        move.Enable();
+
+        fire = playerControlls.Player.Fire;
+        fire.Enable();
+        fire.performed += Fire;
+    }
+    
+    void OnDisable()
+    {
+        move.Disable();
+        fire.Disable();
+    }
+
+
+    private void Fire(InputAction.CallbackContext context)
+    {
+        Debug.Log("We fired");
     }
 
     private void FixedUpdate()
     {
         //controlls
-        xRotation += xRotationForce * Input.GetAxis("Vertical") * Time.deltaTime;
-        
-        yRotation += yRotationForce * Input.GetAxis("Horizontal") * Time.deltaTime;
+        lerpedXRotationForce = Mathf.Lerp(lerpedXRotationForce, xRotationForce * move.ReadValue<Vector2>().y, rotationForceLerpStrenght);
+        lerpedYRotationForce = Mathf.Lerp(lerpedXRotationForce, yRotationForce * move.ReadValue<Vector2>().x, rotationForceLerpStrenght);
+        xRotation += lerpedXRotationForce * Time.deltaTime;
+        yRotation += lerpedYRotationForce * Time.deltaTime;
+        Debug.Log(move.ReadValue<Vector2>());
+
 
         //if player is looking down its positive, if player is looking up its negative
         float mappedPitch = Mathf.Sin(transform.rotation.eulerAngles.x * Mathf.Deg2Rad) * forwardFactor;
