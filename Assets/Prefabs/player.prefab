@@ -102,7 +102,7 @@ MonoBehaviour:
   rb: {fileID: 5057440665914381713}
   baseSpeed: 10
   forwardFactor: 2
-  maxSpeed: 1000
+  maxSpeed: 600
   minVelocity: 10
   rotationFactor: 0
   xRotationForce: 30
