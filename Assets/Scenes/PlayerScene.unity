@@ -569,7 +569,7 @@ PrefabInstance:
       objectReference: {fileID: 1773705768}
     - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: maxSpeed
-      value: 1000
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: cloudForce
