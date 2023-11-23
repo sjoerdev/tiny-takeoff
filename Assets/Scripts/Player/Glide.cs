@@ -31,9 +31,12 @@ public class Glide : MonoBehaviour
     [SerializeField] private float yRotationForce = 50;
     [Range(0f,1f)]
     [SerializeField] private float rotationForceLerpStrenght = 0.9f;
+    [SerializeField] private float zRotationFactor = 20f;
+    [SerializeField] private GameObject visuals;
 
     private float lerpedXRotationForce;
     private float lerpedYRotationForce;
+    private float zRotation;
 
     [Header("WindVector")]
     //windvector
@@ -81,11 +84,11 @@ public class Glide : MonoBehaviour
     private void FixedUpdate()
     {
         //controlls
+
         lerpedXRotationForce = Mathf.Lerp(lerpedXRotationForce, xRotationForce * move.ReadValue<Vector2>().y, rotationForceLerpStrenght);
-        lerpedYRotationForce = Mathf.Lerp(lerpedXRotationForce, yRotationForce * move.ReadValue<Vector2>().x, rotationForceLerpStrenght);
+        lerpedYRotationForce = Mathf.Lerp(lerpedYRotationForce, yRotationForce * move.ReadValue<Vector2>().x, rotationForceLerpStrenght);
         xRotation += lerpedXRotationForce * Time.deltaTime;
         yRotation += lerpedYRotationForce * Time.deltaTime;
-        Debug.Log(move.ReadValue<Vector2>());
 
 
         //if player is looking down its positive, if player is looking up its negative
@@ -103,7 +106,7 @@ public class Glide : MonoBehaviour
         }
 
         //force in direction player is looking
-        transform.rotation = Quaternion.Euler(xRotation, yRotation,0);
+        transform.rotation = Quaternion.Euler(xRotation, yRotation,0f);
         rb.AddRelativeForce(Vector3.forward * currentForwardSpeed);
 
         //minimum force so player always goes forward
@@ -114,7 +117,19 @@ public class Glide : MonoBehaviour
 
         //skitting over clouds
         CloudSkit();
+
+        //max velocity
+        if(rb.velocity.magnitude > maxSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * maxSpeed;
+        }
+
+        //rotation on z axis
+        transform.rotation = Quaternion.Euler(xRotation,yRotation, 0f);
+        zRotation =  transform.InverseTransformVector(rb.velocity).normalized.x * zRotationFactor;
+        visuals.transform.localRotation = Quaternion.Euler(0,0,zRotation);
     }
+
 
     private void CloudSkit()
     {
@@ -141,6 +156,7 @@ public class Glide : MonoBehaviour
                 //rotate player in direction of slope
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rb.velocity), cloudSkitRotationLerp);
                 xRotation = transform.rotation.eulerAngles.x;
+                
 
                 //add force forward so the player can climb up
                 rb.AddForce(transform.forward * cloudForce, ForceMode.VelocityChange);
