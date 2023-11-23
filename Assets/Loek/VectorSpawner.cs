@@ -5,7 +5,7 @@ using UnityEngine;
 public class VectorSpawner : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    public GameObject vectorPrefab;
+    public GameObject resourcePrefab;
     public float spawnChance;
 
     [Header("Raycast Settings")]
@@ -19,6 +19,14 @@ public class VectorSpawner : MonoBehaviour
         SpawnResources();
     }
 
+    private void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.R))
+        {
+            Instantiate(resourcePrefab);
+        }
+    }
+
     void SpawnResources()
     {
         
@@ -26,16 +34,16 @@ public class VectorSpawner : MonoBehaviour
         {
             for (float z = negativePos.y; z < positivePos.y; z += distanceBetweenChecks)
             { 
+                Debug.Log("Working");
                 RaycastHit hit;
                 if (Physics.Raycast(new Vector3(x, heightOfCheck, z), Vector3.down, out hit, rangeOfCheck, layerMask))
                 {
                     if (spawnChance > Random.Range(0, 101))
                     {
-                        Instantiate(vectorPrefab, hit.point, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), transform);
+                        Instantiate(resourcePrefab, hit.point, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), transform);
                     }
                 }   
 
-        
             }
         }
         
