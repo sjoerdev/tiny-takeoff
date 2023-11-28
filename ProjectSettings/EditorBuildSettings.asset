@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Loek/StartScene.unity
+    guid: f2fec47b78954ff4083823171db8dcd9
+  - enabled: 1
+    path: Assets/Loek/DayNightCycle.unity
+    guid: 9e7f50ce70100f448a49a94cfe72d144
   m_configObjects: {}

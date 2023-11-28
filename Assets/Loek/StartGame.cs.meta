@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scripts/GameManager.cs.meta
-guid: 1f2c61aad120d654789a0c6ac815ddee
-========
-guid: c2d1ea7010529d04a8bcc0f8dd4ee938
->>>>>>>> cloud-generation:Assets/Scripts/EndlessTerrain.cs.meta
+guid: fdfdea9120f98d243b588df542a5b23a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
