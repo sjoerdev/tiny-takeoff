@@ -5,18 +5,12 @@ using UnityEngine;
 
 public static class Noise
 {
-    public static float[,] GenerateNoiseMap(int width, int height, int seed, float scale, int octaves, float persistance, float lacunatity, Vector2 offset)
+    public static float[,] GenerateNoiseMap(int width, int height, float scale, int octaves, float persistance, float lacunatity, Vector2 offset)
     {
         float[,] noiseMap = new float[height, width];
 
-        System.Random random = new System.Random(seed);
         Vector2[] octaveOffsets = new Vector2[octaves];
-        for (int i = 0; i < octaves; i++)
-        {
-            float offsetX = random.Next(-100000, 100000) + offset.x;
-            float offsetY = random.Next(-100000, 100000) + offset.y;
-            octaveOffsets[i] = new Vector2(offsetX, offsetY);
-        }
+        for (int i = 0; i < octaves; i++) octaveOffsets[i] = new Vector2(offset.x + 2000, offset.y + 3500);
 
         if (scale <= 0) scale = 0.0001f;
 

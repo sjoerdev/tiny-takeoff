@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Loek.meta
 guid: c2e71f9a197a30141b12069d321af9fb
+========
+guid: 0a876fd406d088846aa4329762e2bd3e
+>>>>>>>> cloud-generation:Assets/Prefabs.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
