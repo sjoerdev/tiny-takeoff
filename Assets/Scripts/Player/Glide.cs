@@ -83,6 +83,8 @@ public class Glide : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(GameManager.Instance.gameState != GameStates.playing)
+            return;
         //controlls
 
         lerpedXRotationForce = Mathf.Lerp(lerpedXRotationForce, xRotationForce * move.ReadValue<Vector2>().y, rotationForceLerpStrenght);
