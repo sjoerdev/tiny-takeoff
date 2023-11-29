@@ -83,15 +83,15 @@ public class Glide : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(GameManager.Instance.gameState != GameStates.playing)
-            return;
         //controlls
 
-        lerpedXRotationForce = Mathf.Lerp(lerpedXRotationForce, xRotationForce * move.ReadValue<Vector2>().y, rotationForceLerpStrenght);
-        lerpedYRotationForce = Mathf.Lerp(lerpedYRotationForce, yRotationForce * move.ReadValue<Vector2>().x, rotationForceLerpStrenght);
-        xRotation += lerpedXRotationForce * Time.deltaTime;
-        yRotation += lerpedYRotationForce * Time.deltaTime;
-
+        if(GameManager.Instance.gameState == GameStates.playing)
+        {
+            lerpedXRotationForce = Mathf.Lerp(lerpedXRotationForce, xRotationForce * move.ReadValue<Vector2>().y, rotationForceLerpStrenght);
+            lerpedYRotationForce = Mathf.Lerp(lerpedYRotationForce, yRotationForce * move.ReadValue<Vector2>().x, rotationForceLerpStrenght);
+            xRotation += lerpedXRotationForce * Time.deltaTime;
+            yRotation += lerpedYRotationForce * Time.deltaTime;
+        }
 
         //if player is looking down its positive, if player is looking up its negative
         float mappedPitch = Mathf.Sin(transform.rotation.eulerAngles.x * Mathf.Deg2Rad) * forwardFactor;
