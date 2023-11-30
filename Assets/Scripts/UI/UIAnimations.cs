@@ -28,21 +28,10 @@ public class UIAnimations : MonoBehaviour
     [SerializeField] private float bottomUIMovedY = 100f;
     private float bottomUINormalY;
 
-    //score
-    private ScoreCounter scoreCounter;
-
-
     void Start()
     {
-<<<<<<< Updated upstream
-        topUINormalY = topUI.transform.position.y;
-        bottomUINormalY= bottomUI.transform.position.y;
-=======
         topUINormalY = topUI.transform.localPosition.y;
         bottomUINormalY= bottomUI.transform.localPosition.y;
-
-        scoreCounter = FindObjectOfType<ScoreCounter>();
->>>>>>> Stashed changes
     }
 
     private GameStates previousState;
@@ -120,28 +109,27 @@ public class UIAnimations : MonoBehaviour
         while(passedTime < topUIAnimationTime)
         {
             passedTime += Time.deltaTime;
-            position = topUI.transform.position;
+            position = topUI.transform.localPosition;
             position.y = Mathf.Lerp(topUINormalY,topUImovedY,passedTime/topUIAnimationTime);
-            topUI.transform.position = position;
+            topUI.transform.localPosition = position;
             yield return new WaitForEndOfFrame();
         }
         position.y = topUImovedY;
-        topUI.transform.position = position;
+        topUI.transform.localPosition = position;
 
-        scoreCounter.Reset();
         yield return new WaitForSeconds(topUIResetWaitTime);
 
         passedTime = 0f;
         while(passedTime < topUIAnimationTime)
         {
             passedTime += Time.deltaTime;
-            position = topUI.transform.position;
+            position = topUI.transform.localPosition;
             position.y = Mathf.Lerp(topUImovedY,topUINormalY,passedTime/topUIAnimationTime);
-            topUI.transform.position = position;
+            topUI.transform.localPosition = position;
             yield return new WaitForEndOfFrame();
         }
         position.y = topUINormalY;
-        topUI.transform.position = position;
+        topUI.transform.localPosition = position;
 
 
         yield return null;
@@ -154,13 +142,13 @@ public class UIAnimations : MonoBehaviour
         while(passedTime < bottomUIAnimationTime)
         {
             passedTime += Time.deltaTime;
-            position = bottomUI.transform.position;
+            position = bottomUI.transform.localPosition;
             position.y = Mathf.Lerp(bottomUINormalY,bottomUIMovedY,passedTime/bottomUIAnimationTime);
-            bottomUI.transform.position = position;
+            bottomUI.transform.localPosition = position;
             yield return new WaitForEndOfFrame();
         }
         position.y = bottomUIMovedY;
-        bottomUI.transform.position = position;
+        bottomUI.transform.localPosition = position;
 
         yield return null;
     }
@@ -171,13 +159,13 @@ public class UIAnimations : MonoBehaviour
         while(passedTime < bottomUIAnimationTime)
         {
             passedTime += Time.deltaTime;
-            position = bottomUI.transform.position;
+            position = bottomUI.transform.localPosition;
             position.y = Mathf.Lerp(bottomUIMovedY,bottomUINormalY,passedTime/bottomUIAnimationTime);
-            bottomUI.transform.position = position;
+            bottomUI.transform.localPosition = position;
             yield return new WaitForEndOfFrame();
         }
         position.y = bottomUINormalY;
-        bottomUI.transform.position = position;
+        bottomUI.transform.localPosition = position;
 
         yield return null;
     }
