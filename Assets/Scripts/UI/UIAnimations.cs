@@ -28,10 +28,21 @@ public class UIAnimations : MonoBehaviour
     [SerializeField] private float bottomUIMovedY = 100f;
     private float bottomUINormalY;
 
+    //score
+    private ScoreCounter scoreCounter;
+
+
     void Start()
     {
+<<<<<<< Updated upstream
         topUINormalY = topUI.transform.position.y;
         bottomUINormalY= bottomUI.transform.position.y;
+=======
+        topUINormalY = topUI.transform.localPosition.y;
+        bottomUINormalY= bottomUI.transform.localPosition.y;
+
+        scoreCounter = FindObjectOfType<ScoreCounter>();
+>>>>>>> Stashed changes
     }
 
     private GameStates previousState;
@@ -117,6 +128,7 @@ public class UIAnimations : MonoBehaviour
         position.y = topUImovedY;
         topUI.transform.position = position;
 
+        scoreCounter.Reset();
         yield return new WaitForSeconds(topUIResetWaitTime);
 
         passedTime = 0f;
