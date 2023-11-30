@@ -16,8 +16,8 @@ public class Glide : MonoBehaviour
     [SerializeField] private float minVelocity;
     private float currentForwardSpeed;
 
-    float xRotation;
-    float yRotation;
+    public float xRotation;
+    public float yRotation;
 
 
     [Header("Controls")]

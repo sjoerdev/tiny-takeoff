@@ -18,6 +18,12 @@ public class PlayerBeginningLogic : MonoBehaviour
     [SerializeField] private float beginningLerpFactor;
     [SerializeField] private float zRotationFactor;
     [SerializeField] private GameObject visuals;
+    private Glide glide;
+
+    void Start()
+    {
+        glide = GetComponent<Glide>();
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -27,9 +33,11 @@ public class PlayerBeginningLogic : MonoBehaviour
                 transform.parent = camera.transform;
                 transform.localPosition = startPosition;
                 transform.localRotation = Quaternion.Euler(startRotation); 
+                glide.xRotation = transform.eulerAngles.x;
+                glide.yRotation = transform.eulerAngles.y;
                 break;
             case GameStates.beginning:
-                transform.localPosition = Vector3.Lerp(transform.localPosition, camera.transform.rotation*idealPointInCamera, beginningLerpFactor);
+                transform.position = Vector3.Lerp(transform.position, camera.transform.position + camera.transform.rotation*idealPointInCamera, beginningLerpFactor);
                 StartCoroutine(Beginning());
                 break;
         }
