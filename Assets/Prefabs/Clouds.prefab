@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewer: {fileID: 0}
-  chunkSize: 32
+  chunkSize: 600
   scale: 32
   octaves: 6
   persistance: 0.5
