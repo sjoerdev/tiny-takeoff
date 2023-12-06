@@ -7,8 +7,10 @@ public class WindSound : MonoBehaviour
 {
     [SerializeField] private float minSpeed;
     [SerializeField] private float maxSpeed;
+    [Min(0f)]
     [SerializeField] private float minPitch = 0.1f;
     [SerializeField] private float maxPitch = 2f;
+    [Min(0f)]
     [SerializeField] private float minVolume = 0.1f;
     [SerializeField] private float maxVolume = 1f;
     private Transform camera;
@@ -17,7 +19,7 @@ public class WindSound : MonoBehaviour
 
     private float volumeDelta;
     private float pitchDelta;
-    // Start is called before the first frame update
+
     void Start()
     {
         wind = GetComponent<AudioSource>();
@@ -26,23 +28,23 @@ public class WindSound : MonoBehaviour
         pitchDelta = (maxPitch - minPitch) / 1f;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
+        //calculates the speed of the camera
         float speed = (camera.position - previousPosition).magnitude / Time.fixedDeltaTime;
         float speedPercentage = 0;
         if(speed != 0)
         {
+            //speed percentage
             speedPercentage = speed / (maxSpeed - minSpeed);
 
         }
+        speedPercentage = Mathf.Clamp(speedPercentage, 0f,1f);
         Debug.Log(speedPercentage);
+        //linear formula between min and max depending on speed;
         wind.pitch = pitchDelta * speedPercentage + minPitch;
         wind.volume = volumeDelta * speedPercentage + minVolume;
-        wind.pitch = Mathf.Clamp(wind.pitch, 0,maxPitch);
-        wind.volume = Mathf.Clamp(wind.pitch, 0,maxVolume);
 
         previousPosition = camera.position;
-
     }
 }

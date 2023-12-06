@@ -397,7 +397,7 @@ MonoBehaviour:
   minPitch: 0.1
   maxPitch: 1.5
   minVolume: 0.1
-  maxVolume: 0.6
+  maxVolume: 0.3
 --- !u!1 &918057240
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,8 +525,8 @@ MonoBehaviour:
   nightMusic:
   - {fileID: 2021206124}
   - {fileID: 107953467}
-  minimumWait: 120
-  maximumWait: 360
+  minimumWait: 60
+  maximumWait: 180
   day: 0
 --- !u!4 &1428377021
 Transform:
