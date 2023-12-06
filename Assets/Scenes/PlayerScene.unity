@@ -423,7 +423,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1763255764366514999, guid: 539dc524811796a48b8c1396a439fdca, type: 3}
       propertyPath: scale
-      value: 1500
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 1763255764366514999, guid: 539dc524811796a48b8c1396a439fdca, type: 3}
       propertyPath: viewer
@@ -431,7 +431,7 @@ PrefabInstance:
       objectReference: {fileID: 1182896815}
     - target: {fileID: 1763255764366514999, guid: 539dc524811796a48b8c1396a439fdca, type: 3}
       propertyPath: amplitude
-      value: 256
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 1763255764366514999, guid: 539dc524811796a48b8c1396a439fdca, type: 3}
       propertyPath: chunkSize
@@ -636,7 +636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9044302544077740469, guid: 8898ca9f1c534654b9e4dc18410e3a8c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
