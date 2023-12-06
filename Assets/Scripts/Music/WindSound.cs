@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class WindSound : MonoBehaviour
 {
@@ -13,11 +14,16 @@ public class WindSound : MonoBehaviour
     private Transform camera;
     private AudioSource wind;
     private Vector3 previousPosition;
+
+    private float volumeDelta;
+    private float pitchDelta;
     // Start is called before the first frame update
     void Start()
     {
         wind = GetComponent<AudioSource>();
         camera = GetComponentInParent<Transform>();
+        volumeDelta = (maxVolume - minVolume) / 1f;
+        pitchDelta = (maxPitch - minPitch) / 1f;
     }
 
     // Update is called once per frame
@@ -31,8 +37,8 @@ public class WindSound : MonoBehaviour
 
         }
         Debug.Log(speedPercentage);
-        wind.pitch = (maxPitch + minPitch) * speedPercentage;
-        wind.volume = (maxVolume + minVolume) * speedPercentage;
+        wind.pitch = pitchDelta * speedPercentage + minPitch;
+        wind.volume = volumeDelta * speedPercentage + minVolume;
         wind.pitch = Mathf.Clamp(wind.pitch, 0,maxPitch);
         wind.volume = Mathf.Clamp(wind.pitch, 0,maxVolume);
 

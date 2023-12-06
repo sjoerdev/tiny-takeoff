@@ -395,7 +395,7 @@ MonoBehaviour:
   minSpeed: 1
   maxSpeed: 400
   minPitch: 0.1
-  maxPitch: 1.8
+  maxPitch: 1.5
   minVolume: 0.1
   maxVolume: 0.6
 --- !u!1 &918057240
