@@ -14,6 +14,7 @@ public class WindSound : MonoBehaviour
     [SerializeField] private float minVolume = 0.1f;
     [SerializeField] private float maxVolume = 1f;
     private Transform camera;
+    [SerializeField] private Rigidbody rb;
     private AudioSource wind;
     private Vector3 previousPosition;
 
@@ -30,8 +31,8 @@ public class WindSound : MonoBehaviour
 
     void FixedUpdate()
     {
-        //calculates the speed of the camera
-        float speed = (camera.position - previousPosition).magnitude / Time.fixedDeltaTime;
+        //calculates the speed of the player
+        float speed = rb.velocity.magnitude;
         float speedPercentage = 0;
         if(speed != 0)
         {
@@ -40,6 +41,8 @@ public class WindSound : MonoBehaviour
 
         }
         speedPercentage = Mathf.Clamp(speedPercentage, 0f,1f);
+
+
         Debug.Log(speedPercentage);
         //linear formula between min and max depending on speed;
         wind.pitch = pitchDelta * speedPercentage + minPitch;

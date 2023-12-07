@@ -10,8 +10,6 @@ public class camScript : MonoBehaviour
     [Range(0f,1f)]
     [SerializeField] private float positionDrag;
 
-    [SerializeField] private float pausedYPosition;
-
     // Update is called once per frame
     void FixedUpdate()
     {

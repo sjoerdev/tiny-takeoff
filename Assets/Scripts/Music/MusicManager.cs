@@ -9,18 +9,36 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField] private float minimumWait;
     [SerializeField] private float maximumWait;
-    public bool day;
-    void Start()
+    private LightingManager timeManager;
+
+    [SerializeField] private float morningTime = 12;
+    [SerializeField] private float nightTime = 36;
+    bool day;
+    private Coroutine musicTimer;
+    void Update()
     {
-        StartCoroutine(MusicTimer());
+        if(GameManager.Instance.gameState == GameStates.beginning && musicTimer == null)
+        {
+            musicTimer = StartCoroutine(MusicTimer());
+            timeManager = GetComponentInParent<LightingManager>();
+        }
     }
 
     private IEnumerator MusicTimer()
     {
         float songLength = 0;
-        while(GameManager.Instance.gameState == GameStates.beginning || GameManager.Instance.gameState == GameStates.playing)
+        while(GameManager.Instance.gameState != GameStates.start)
         {
         yield return new WaitForSeconds(Random.Range(minimumWait, maximumWait) + songLength);
+
+        if(timeManager.GetTimeOfDay() > morningTime && timeManager.GetTimeOfDay() < nightTime)
+        {
+            day = true;
+        }
+        else
+        {
+            day = false;
+        }
 
         int index;
         switch(day)
@@ -37,7 +55,7 @@ public class MusicManager : MonoBehaviour
                 break;
         }
         }
-
+        musicTimer = null;
         yield return null;
     }
 }

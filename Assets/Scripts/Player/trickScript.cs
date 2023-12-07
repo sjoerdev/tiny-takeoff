@@ -36,6 +36,7 @@ public class trickScript : MonoBehaviour
 
     private void Fire(InputAction.CallbackContext context)
     {
-        trick.Play();
+        if(GameManager.Instance.gameState == GameStates.playing)
+            trick.Play();
     }
 }
