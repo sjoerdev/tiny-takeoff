@@ -179,6 +179,28 @@
                 },
                 {
                     "name": "",
+                    "id": "ddfe9410-afa4-46a4-a52b-08a3d8e7a799",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6e25a7b-4f6e-4782-a757-eba331701c7c",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "59aafd51-de72-49a4-9c8e-a695d5d75610",
                     "path": "<Keyboard>/escape",
                     "interactions": "",

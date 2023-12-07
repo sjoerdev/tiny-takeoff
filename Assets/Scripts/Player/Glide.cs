@@ -23,7 +23,6 @@ public class Glide : MonoBehaviour
     [Header("Controls")]
     PlayerControlls playerControlls;
     private InputAction move;
-    private InputAction fire;
     [Range(0f, 1f)] 
     [SerializeField] float rotationFactor;
     [SerializeField] private float xRotationForce = 30;
@@ -53,6 +52,9 @@ public class Glide : MonoBehaviour
     [Range(0f,1f)]
     [SerializeField] private float cloudSkitSpeedLerp = 0.4f;
 
+    //windvector
+    [SerializeField] private AudioSource windVectorSound;
+
 
     void Awake()
     {
@@ -63,22 +65,11 @@ public class Glide : MonoBehaviour
     {
         move = playerControlls.Player.Move;
         move.Enable();
-
-        fire = playerControlls.Player.Fire;
-        fire.Enable();
-        fire.performed += Fire;
     }
     
     void OnDisable()
     {
         move.Disable();
-        fire.Disable();
-    }
-
-
-    private void Fire(InputAction.CallbackContext context)
-    {
-        Debug.Log("We fired");
     }
 
     private void FixedUpdate()
@@ -174,6 +165,7 @@ public class Glide : MonoBehaviour
     public void WindVector()
     {
         rb.AddForce(transform.forward * vectorThrust, ForceMode.Impulse);
+        windVectorSound.Play();
     }
 
 

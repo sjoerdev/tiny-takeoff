@@ -18,7 +18,7 @@ public class MusicManager : MonoBehaviour
     private IEnumerator MusicTimer()
     {
         float songLength = 0;
-        while(true)
+        while(GameManager.Instance.gameState == GameStates.beginning || GameManager.Instance.gameState == GameStates.playing)
         {
         yield return new WaitForSeconds(Random.Range(minimumWait, maximumWait) + songLength);
 
