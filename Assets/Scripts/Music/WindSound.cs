@@ -43,7 +43,6 @@ public class WindSound : MonoBehaviour
         speedPercentage = Mathf.Clamp(speedPercentage, 0f,1f);
 
 
-        Debug.Log(speedPercentage);
         //linear formula between min and max depending on speed;
         wind.pitch = pitchDelta * speedPercentage + minPitch;
         wind.volume = volumeDelta * speedPercentage + minVolume;
