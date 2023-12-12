@@ -30,10 +30,11 @@ public static class Noise
 
                 for (int i = 0; i < octaves; i++)
                 {
-                    float sampleX = (x - halfWidth) / scale * frequency + octaveOffsets[i].x;
-                    float sampleY = (y - halfHeight) / scale * frequency + octaveOffsets[i].y;
+                    float sampleX = (x - halfWidth) * frequency + octaveOffsets[i].x;
+                    float sampleY = (y - halfHeight) * frequency + octaveOffsets[i].y;
 
-                    float value = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
+                    //float value = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
+                    float value = Simplex.CalcPixel2D((int)sampleX, (int)sampleY, 1 / scale);
                     noiseHeight += value * amplitude;
 
                     amplitude *= persistance;
