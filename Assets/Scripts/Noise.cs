@@ -10,8 +10,20 @@ public static class Noise
         {
             for (int x = 0; x < width; x++)
             {
-                float value = Simplex.CalcPixel2D(x + (int)offset.x + width / 2, y + (int)offset.y + height / 2, 1 / scale);
-                heightMap[x, y] = value * amplitude;
+                float value = 0;
+                float currentAmplitude = amplitude;
+                float currentScale = scale;
+
+                for (int i = 0; i < octaves; i++)
+                {
+                    value += Simplex.CalcPixel2D(x + (int)offset.x + width / 2, y + (int)offset.y + height / 2, 1 / currentScale) * currentAmplitude;
+                    
+                    // Update amplitude and scale for the next octave
+                    currentAmplitude *= 0.5f;
+                    currentScale *= 0.5f;
+                }
+
+                heightMap[x, y] = value;
             }
         }
 
