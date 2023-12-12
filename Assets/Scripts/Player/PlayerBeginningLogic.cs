@@ -15,10 +15,13 @@ public class PlayerBeginningLogic : MonoBehaviour
     [SerializeField] private float beginningTime = 1f;
 
     [Range(0f,1f)]
-    [SerializeField] private float beginningLerpFactor;
     [SerializeField] private float zRotationFactor;
     [SerializeField] private GameObject visuals;
+    [SerializeField] private float beginningVelocity;
     private Glide glide;
+    private Vector3 currentVelocity;
+
+    bool playing;
 
     void Start()
     {
@@ -37,15 +40,29 @@ public class PlayerBeginningLogic : MonoBehaviour
                 glide.yRotation = transform.eulerAngles.y;
                 break;
             case GameStates.beginning:
-                transform.position = Vector3.Lerp(transform.position, camera.transform.position + camera.transform.rotation*idealPointInCamera, beginningLerpFactor);
+                transform.localPosition = Vector3.SmoothDamp(transform.localPosition,camera.transform.rotation * idealPointInCamera,ref currentVelocity, beginningTime);
                 StartCoroutine(Beginning());
+                playing = false;
+                rb.useGravity = false;
+                rb.drag = 0f;
+                break;
+            case GameStates.playing:
+                if(playing == false)
+                {
+                    UnityEngine.Debug.Log("beginningVelocity");
+                    playing = true;
+                    rb.useGravity = true;
+                    rb.drag = 1f;
+                    //Vector3 velocity = transform.InverseTransformDirection(rb.velocity);
+                    rb.velocity = transform.rotation * (Vector3.forward * beginningVelocity);
+                }
                 break;
         }
     }
 
     private IEnumerator Beginning()
     {
-        yield return new WaitForSeconds(beginningTime);
+        yield return new WaitForSecondsRealtime(beginningTime);
         GameManager.Instance.gameState = GameStates.playing;
         transform.SetParent(null);
         yield return null;

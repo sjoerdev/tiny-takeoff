@@ -83,6 +83,10 @@ public class Glide : MonoBehaviour
             xRotation += lerpedXRotationForce * Time.deltaTime;
             yRotation += lerpedYRotationForce * Time.deltaTime;
         }
+        if(GameManager.Instance.gameState == GameStates.beginning)
+        {
+            return;
+        }
 
         //if player is looking down its positive, if player is looking up its negative
         float mappedPitch = Mathf.Sin(transform.rotation.eulerAngles.x * Mathf.Deg2Rad) * forwardFactor;
