@@ -31,17 +31,17 @@ public static class Simplex
 
     public static float CalcPixel1D(int x, float scale)
     {
-        return Generate(x * scale) * 128 + 128;
+        return Generate(x * scale);
     }
 
     public static float CalcPixel2D(int x, int y, float scale)
     {
-        return Generate(x * scale, y * scale) * 128 + 128;
+        return Generate(x * scale, y * scale);
     }
 
     public static float CalcPixel3D(int x, int y, int z, float scale)
     {
-        return Generate(x * scale, y * scale, z * scale) * 128 + 128;
+        return Generate(x * scale, y * scale, z * scale);
     }
 
     static Simplex()
