@@ -11,6 +11,9 @@ public class BirdFlock : MonoBehaviour
 
     [SerializeField] private float terraincheckDistance;
     [SerializeField] private LayerMask terrainLayer;
+    [SerializeField] private float maxY;
+    [SerializeField] private float upAngle;
+    [SerializeField] private float downAngle;
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -35,7 +38,11 @@ public class BirdFlock : MonoBehaviour
         {
             if(Vector3.Distance(transform.position, downHit.point) <= terraincheckDistance)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(-90,transform.rotation.eulerAngles.y,transform.rotation.eulerAngles.z),rotationLerp);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(upAngle,transform.rotation.eulerAngles.y,transform.rotation.eulerAngles.z),rotationLerp);
+            }
+            else if(transform.position.y > maxY)
+            {
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(downAngle,transform.rotation.eulerAngles.y,transform.rotation.eulerAngles.z),rotationLerp);
             }
             else
             {
