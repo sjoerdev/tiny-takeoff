@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 public class EndlessTerrain : MonoBehaviour 
 {
-	public const float maxViewDst = 256;
+	public const float maxViewDst = 512;
 	public Transform viewer;
 
 	public static Vector2 viewerPosition;
@@ -16,8 +16,6 @@ public class EndlessTerrain : MonoBehaviour
 
     public float scale;
     public int octaves;
-    public float persistance;
-    public float lacunatity;
 	public int amplitude;
 	public GameObject chunkPrefab;
 
@@ -35,8 +33,8 @@ public class EndlessTerrain : MonoBehaviour
 	public GameObject GenerateChunk(Vector2 offset)
 	{
 		var chunk = Instantiate(chunkPrefab);
-		float[,] noiseMap = Noise.GenerateNoiseMap(chunkSize, chunkSize, scale, octaves, persistance, lacunatity, offset);
-		var meshData = MeshGenerator.GenerateTerrainMesh(noiseMap, amplitude);
+		float[,] heightMap = Noise.GenerateHeightMap(chunkSize, chunkSize, scale, octaves, amplitude, offset);
+		var meshData = MeshGenerator.GenerateTerrainMesh(heightMap);
 		chunk.GetComponent<MeshFilter>().sharedMesh = meshData.CreateMesh();
 		return chunk;
 	}
