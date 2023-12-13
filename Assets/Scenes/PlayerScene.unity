@@ -423,7 +423,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1763255764366514999, guid: 539dc524811796a48b8c1396a439fdca, type: 3}
       propertyPath: scale
-      value: 3000
+      value: 16384
       objectReference: {fileID: 0}
     - target: {fileID: 1763255764366514999, guid: 539dc524811796a48b8c1396a439fdca, type: 3}
       propertyPath: viewer
@@ -431,11 +431,11 @@ PrefabInstance:
       objectReference: {fileID: 1182896815}
     - target: {fileID: 1763255764366514999, guid: 539dc524811796a48b8c1396a439fdca, type: 3}
       propertyPath: amplitude
-      value: 500
+      value: 1024
       objectReference: {fileID: 0}
     - target: {fileID: 1763255764366514999, guid: 539dc524811796a48b8c1396a439fdca, type: 3}
       propertyPath: chunkSize
-      value: 256
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 2597883377133738840, guid: 539dc524811796a48b8c1396a439fdca, type: 3}
       propertyPath: m_Name
