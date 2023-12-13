@@ -1082,6 +1082,7 @@ MonoBehaviour:
   maxY: 300
   upAngle: -20
   downAngle: 20
+  despawnDistance: 1000
 --- !u!1 &7421349202054205478
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,10 @@ public class BirdFlock : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(GameManager.Instance.gameState == GameStates.paused)
+        {
+            return;
+        }
         //if the bird goes up against a slope, rotate them up
         RaycastHit forwardHit;
         RaycastHit downHit;
