@@ -13,6 +13,7 @@ public class BirdSpawner : MonoBehaviour
     [SerializeField] private float spawnDistance;
     [SerializeField] private float despawnDistance;
     [SerializeField] private LayerMask terrainLayer;
+    [SerializeField] private float cloudDistance;
     private Transform flockPoint;
 
     // Start is called before the first frame update
@@ -59,7 +60,7 @@ public class BirdSpawner : MonoBehaviour
         if(Physics.Raycast(flock.transform.position, Vector3.up, out hit, Mathf.Infinity, terrainLayer))
         {
             Debug.Log("birds should spawn at "  + hit.point);
-            flock.transform.position = hit.point;
+            flock.transform.position = hit.point + Vector3.up * cloudDistance;
         }
 
         flockPoint.localPosition = Vector3.zero;

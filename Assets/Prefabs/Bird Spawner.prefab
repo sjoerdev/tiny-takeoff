@@ -53,3 +53,4 @@ MonoBehaviour:
   terrainLayer:
     serializedVersion: 2
     m_Bits: 8
+  cloudDistance: 50
