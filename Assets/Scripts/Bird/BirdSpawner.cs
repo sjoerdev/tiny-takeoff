@@ -39,7 +39,7 @@ public class BirdSpawner : MonoBehaviour
             flock.SetActive(false);
         }
 
-        Debug.Log(playerSpeed);
+//        Debug.Log(playerSpeed);
 
         previousPosition = player.position;
     }
