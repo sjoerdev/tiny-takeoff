@@ -5,19 +5,35 @@ using UnityEngine;
 public class IslandBehaviour : MonoBehaviour
 {
     public ObjectPool pool;
-    public float lifeTime = 10f; 
+    public Transform playerTransform;
+    public float deactivateDistance = 100f; // Distance at which the island deactivates
 
-    void OnEnable()
+    private void Start()
     {
-        pool = FindObjectOfType<ObjectPool>();
-        Invoke(nameof(ReturnToPool), lifeTime);
+        playerTransform = GameObject.FindWithTag("Player").transform;
+        pool = GameObject.FindObjectOfType<ObjectPool>();
+    }
+
+    private void Update()
+    {
+        if (playerTransform == null) return;
+
+        float distance = Vector3.Distance(transform.position, playerTransform.position);
+        if (distance > deactivateDistance)
+        {
+            ReturnToPool();
+        }
     }
 
     private void ReturnToPool()
     {
-        pool.ReturnObject(gameObject);
+        if (pool != null)
+        {
+            pool.ReturnObject(gameObject);
+        }
+        else
+        {
+            Debug.LogError("ObjectPool reference is null.");
+        }
     }
-
-    // Implement logic to detect when the player passes the island
-    // And call ReturnToPool()
 }
