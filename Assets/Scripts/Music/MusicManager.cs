@@ -27,6 +27,7 @@ public class MusicManager : MonoBehaviour
     private IEnumerator MusicTimer()
     {
         float songLength = 0;
+        yield return new WaitForSeconds(Random.Range(minimumWait, maximumWait) + songLength);
         while(GameManager.Instance.gameState != GameStates.start)
         {
 
