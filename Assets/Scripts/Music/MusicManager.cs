@@ -29,7 +29,6 @@ public class MusicManager : MonoBehaviour
         float songLength = 0;
         while(GameManager.Instance.gameState != GameStates.start)
         {
-        yield return new WaitForSeconds(Random.Range(minimumWait, maximumWait) + songLength);
 
         if(timeManager.GetTimeOfDay() > morningTime && timeManager.GetTimeOfDay() < nightTime)
         {
@@ -54,6 +53,7 @@ public class MusicManager : MonoBehaviour
                 songLength = nightMusic[index].clip.length;
                 break;
         }
+        yield return new WaitForSeconds(Random.Range(minimumWait, maximumWait) + songLength);
         }
         musicTimer = null;
         yield return null;
