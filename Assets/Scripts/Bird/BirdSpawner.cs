@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class BirdSpawner : MonoBehaviour
@@ -15,6 +16,9 @@ public class BirdSpawner : MonoBehaviour
     [SerializeField] private LayerMask terrainLayer;
     [SerializeField] private float cloudDistance;
     private Transform flockPoint;
+    private float playerSpeed;
+    [SerializeField] private float playerSpeedAmplitude;
+    private Vector3 previousPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -27,12 +31,17 @@ public class BirdSpawner : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        playerSpeed = Vector3.Distance(previousPosition, player.position) * playerSpeedAmplitude;
         if(Vector3.Distance(player.transform.position, flockPoint.transform.position) >= despawnDistance)
         {
             flock.SetActive(false);
         }
+
+        Debug.Log(playerSpeed);
+
+        previousPosition = player.position;
     }
 
     private IEnumerator Spawning()
@@ -52,12 +61,14 @@ public class BirdSpawner : MonoBehaviour
     {
         //select new point for birds to spawn
         flock.transform.rotation = Quaternion.Euler(0,UnityEngine.Random.Range(0f,360f),0);
-        flock.transform.position = player.position + (flock.transform.rotation * Vector3.back * spawnDistance);
+        Vector3 positionOffset = player.rotation * Vector3.forward;
+        positionOffset.y = 0;
+        flock.transform.position = (player.position + positionOffset * playerSpeed) + (flock.transform.rotation * Vector3.back * spawnDistance);
         
         //birds always spawn above terrain
         RaycastHit hit;
 //        Debug.Log("doing raycast at" + flock.transform.position);
-        if(Physics.Raycast(flock.transform.position, Vector3.up, out hit, Mathf.Infinity, terrainLayer))
+        if(Physics.Raycast(flock.transform.position + Vector3.up * 100f, Vector3.down, out hit, Mathf.Infinity, terrainLayer))
         {
 //            Debug.Log("birds should spawn at "  + hit.point);
             flock.transform.position = hit.point + Vector3.up * cloudDistance;

@@ -187,7 +187,7 @@ PrefabInstance:
       objectReference: {fileID: 1182896815}
     - target: {fileID: 3866076549951441464, guid: c4447c6ef3ca03247bb210d943f086ac, type: 3}
       propertyPath: maxSpawnTime
-      value: 1
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3866076549951441464, guid: c4447c6ef3ca03247bb210d943f086ac, type: 3}
       propertyPath: minSpawnTime
@@ -195,11 +195,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3866076549951441464, guid: c4447c6ef3ca03247bb210d943f086ac, type: 3}
       propertyPath: spawnDistance
-      value: 500
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3866076549951441464, guid: c4447c6ef3ca03247bb210d943f086ac, type: 3}
       propertyPath: despawnDistance
-      value: 600
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866076549951441464, guid: c4447c6ef3ca03247bb210d943f086ac, type: 3}
+      propertyPath: playerSpeedAmplitude
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7291414655654120650, guid: c4447c6ef3ca03247bb210d943f086ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -545,7 +549,7 @@ PrefabInstance:
       objectReference: {fileID: 456388093}
     - target: {fileID: 4871756190358436466, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: position.y
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4871756190358436466, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: position.z
