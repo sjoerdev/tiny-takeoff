@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class UIAnimations : MonoBehaviour
 {
@@ -116,6 +117,8 @@ public class UIAnimations : MonoBehaviour
         }
         position.y = topUImovedY;
         topUI.transform.localPosition = position;
+
+        GameManager.Instance.score = 0f;
 
         yield return new WaitForSeconds(topUIResetWaitTime);
 

@@ -307,11 +307,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 166d992cbbd3c614984a9a92879a1817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {x: -30, y: 0, z: 0}
+  startPosition: {x: 20, y: 0, z: 0}
   startRotation: {x: 0, y: 0, z: 0}
   camera: {fileID: 1182896811}
   rb: {fileID: 456388097}
-  idealPointInCamera: {x: -3, y: 2, z: 8}
+  idealPointInCamera: {x: -10, y: 0, z: 2}
   beginningTime: 3
   zRotationFactor: 1
   visuals: {fileID: 401009009}
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24ff81ce94b1c747812d9f225f5d46a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  failDistance: 10
+  failDistance: 5
   terrainLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -449,7 +449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 655499587419071289, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 655499587419071289, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -947,7 +947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7658153397306743031, guid: 8c03efe7c8efc2a41b9a13ff3ef3ef8e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7658153397306743031, guid: 8c03efe7c8efc2a41b9a13ff3ef3ef8e, type: 3}
       propertyPath: m_LocalPosition.z

@@ -40,7 +40,7 @@ public class PlayerBeginningLogic : MonoBehaviour
                 glide.yRotation = transform.eulerAngles.y;
                 break;
             case GameStates.beginning:
-                transform.localPosition = Vector3.SmoothDamp(transform.localPosition,camera.transform.rotation * idealPointInCamera,ref currentVelocity, beginningTime);
+                transform.localPosition = Vector3.SmoothDamp(transform.localPosition, idealPointInCamera,ref currentVelocity, beginningTime);
                 StartCoroutine(Beginning());
                 playing = false;
                 rb.useGravity = false;
