@@ -143,7 +143,7 @@ public class Glide : MonoBehaviour
         {
             if(Physics.Raycast(transform.position, downDir, out downHit, raycastDistance, terrainlayer))
             {
-                //get slope
+                //get slope of terrain
                 Vector3 slopeDir = forwardHit.point - downHit.point;
 
                 //lerp rb velocity in direction of slope
