@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 public class EndlessTerrain : MonoBehaviour 
 {
-	public const float maxViewDst = 1024;
+	public const float maxViewDst = 512;
 	public Transform viewer;
 
 	public static Vector2 viewerPosition;
