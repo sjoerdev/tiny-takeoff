@@ -14,6 +14,7 @@ public class Glide : MonoBehaviour
     [SerializeField] private float forwardFactor;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float minVelocity;
+    [SerializeField] private float gravity;
     private float currentForwardSpeed;
 
     public float xRotation;
@@ -59,6 +60,7 @@ public class Glide : MonoBehaviour
     void Awake()
     {
         playerControlls = new PlayerControlls();
+        Physics.gravity = Vector3.down * gravity;
     }
 
     void OnEnable()

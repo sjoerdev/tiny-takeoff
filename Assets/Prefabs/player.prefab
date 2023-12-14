@@ -411,10 +411,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5057440665914381713}
-  baseSpeed: 10
-  forwardFactor: 2
-  maxSpeed: 600
-  minVelocity: 10
+  baseSpeed: 1.666667
+  forwardFactor: 0.33333334
+  maxSpeed: 100
+  minVelocity: 1.6666666
   xRotation: 0
   yRotation: 0
   rotationFactor: 0
@@ -424,9 +424,9 @@ MonoBehaviour:
   zRotationFactor: 60
   visuals: {fileID: 8992193000124888556}
   vectorThrust: 300
-  raycastDistance: 20
+  raycastDistance: 3.333333
   raycastHeightStart: 0
-  cloudForce: 3
+  cloudForce: 0.5
   terrainlayer:
     serializedVersion: 2
     m_Bits: 8

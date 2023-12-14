@@ -56,10 +56,10 @@ public class BirdSpawner : MonoBehaviour
         
         //birds always spawn above terrain
         RaycastHit hit;
-        Debug.Log("doing raycast at" + flock.transform.position);
+//        Debug.Log("doing raycast at" + flock.transform.position);
         if(Physics.Raycast(flock.transform.position, Vector3.up, out hit, Mathf.Infinity, terrainLayer))
         {
-            Debug.Log("birds should spawn at "  + hit.point);
+//            Debug.Log("birds should spawn at "  + hit.point);
             flock.transform.position = hit.point + Vector3.up * cloudDistance;
         }
 

@@ -12,9 +12,12 @@ public class FailCheck : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(transform.position, transform.rotation * Vector3.up, out hit, failDistance, terrainLayer))
+        if(GameManager.Instance.gameState == GameStates.playing && Physics.Raycast(transform.position + Vector3.up * failDistance, Vector3.down, out hit, 1f, terrainLayer))
         {
-            GameManager.Instance.gameState = GameStates.start;
+            if(Vector3.Distance(transform.position, hit.point) <= failDistance)
+            {
+                GameManager.Instance.gameState = GameStates.start;
+            }
         }
     }
 }

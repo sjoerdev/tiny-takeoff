@@ -49,7 +49,7 @@ public class PlayerBeginningLogic : MonoBehaviour
             case GameStates.playing:
                 if(playing == false)
                 {
-                    UnityEngine.Debug.Log("beginningVelocity");
+//                    UnityEngine.Debug.Log("beginningVelocity");
                     playing = true;
                     rb.useGravity = true;
                     rb.drag = 1f;
