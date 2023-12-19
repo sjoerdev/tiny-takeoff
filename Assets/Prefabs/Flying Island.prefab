@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pool: {fileID: 0}
-  lifeTime: 20
+  playerTransform: {fileID: 0}
+  deactivateDistance: 1500
 --- !u!135 &6834227293196625453
 SphereCollider:
   m_ObjectHideFlags: 0
