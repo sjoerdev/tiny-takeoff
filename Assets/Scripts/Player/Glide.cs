@@ -9,13 +9,17 @@ using UnityEngine.InputSystem;
 public class Glide : MonoBehaviour
 {
     [Header("glide")]
+    [SerializeField] private float startingSpeed;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float baseSpeed;
     [SerializeField] private float forwardFactor;
     [SerializeField] private float maxSpeed;
-    [SerializeField] private float minVelocity;
     [SerializeField] private float gravity;
     private float currentForwardSpeed;
+
+    [SerializeField] private float startStallingSpeed;
+    [SerializeField] private float endStallingSpeed;
+
 
     public float xRotation;
     public float yRotation;
@@ -33,6 +37,9 @@ public class Glide : MonoBehaviour
     [SerializeField] private float rotationForceLerpStrenght = 0.9f;
     [SerializeField] private float zRotationFactor = 20f;
     [SerializeField] private GameObject visuals;
+
+    [SerializeField] private float stallingRotation;
+    [SerializeField] private float stallingLerp;
 
     private float lerpedXRotationForce;
     private float lerpedYRotationForce;
@@ -56,11 +63,14 @@ public class Glide : MonoBehaviour
     //windvector
     [SerializeField] private AudioSource windVectorSound;
 
+    Coroutine stalling;
+
 
     void Awake()
     {
         playerControlls = new PlayerControlls();
         Physics.gravity = Vector3.down * gravity;
+        currentForwardSpeed = startingSpeed;
     }
 
     void OnEnable()
@@ -82,7 +92,10 @@ public class Glide : MonoBehaviour
         {
             lerpedXRotationForce = Mathf.Lerp(lerpedXRotationForce, xRotationForce * move.ReadValue<Vector2>().y, rotationForceLerpStrenght);
             lerpedYRotationForce = Mathf.Lerp(lerpedYRotationForce, yRotationForce * move.ReadValue<Vector2>().x, rotationForceLerpStrenght);
-            xRotation += lerpedXRotationForce * Time.deltaTime;
+            if(stalling == null)
+            {
+                xRotation += lerpedXRotationForce * Time.deltaTime;
+            }
             yRotation += lerpedYRotationForce * Time.deltaTime;
         }
         if(GameManager.Instance.gameState == GameStates.beginning)
@@ -94,25 +107,17 @@ public class Glide : MonoBehaviour
         float mappedPitch = Mathf.Sin(transform.rotation.eulerAngles.x * Mathf.Deg2Rad) * forwardFactor;
 
 
-        if(rb.velocity.magnitude >= minVelocity)
+        currentForwardSpeed += mappedPitch;           
+        Mathf.Clamp(currentForwardSpeed, 0, maxSpeed);
+
+        if(currentForwardSpeed < startStallingSpeed)
         {
-            currentForwardSpeed += mappedPitch;           
-            Mathf.Clamp(currentForwardSpeed, 0, maxSpeed);
-        }
-        else
-        {
-            currentForwardSpeed = 0f;
+            stalling = StartCoroutine(Stalling());
         }
 
         //force in direction player is looking
         transform.rotation = Quaternion.Euler(xRotation, yRotation,0f);
         rb.AddRelativeForce(Vector3.forward * currentForwardSpeed);
-
-        //minimum force so player always goes forward
-        if( transform.InverseTransformDirection(rb.velocity).z <= minVelocity)
-        {
-            rb.AddRelativeForce(Vector3.forward * minVelocity, ForceMode.VelocityChange);
-        }
 
         //skitting over clouds
         CloudSkit();
@@ -174,5 +179,19 @@ public class Glide : MonoBehaviour
         windVectorSound.Play();
     }
 
+    void OnCollisionEnter()
+    {
+        currentForwardSpeed = transform.InverseTransformDirection(rb.velocity).z;
+    }
 
+    private IEnumerator Stalling()
+    {
+        while(currentForwardSpeed <= endStallingSpeed)
+        {
+            xRotation = Mathf.Lerp(xRotation, stallingRotation, stallingLerp);
+            yield return new WaitForFixedUpdate();
+        }
+        stalling = null;
+        yield return null;
+    }
 }
