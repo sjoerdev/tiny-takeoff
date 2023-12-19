@@ -179,7 +179,7 @@ public class Glide : MonoBehaviour
         windVectorSound.Play();
     }
 
-    void OnCollisionEnter()
+    void OnCollisionStay()
     {
         currentForwardSpeed = transform.InverseTransformDirection(rb.velocity).z;
     }
