@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameStates gameState;
+    public float score;
     void Awake()
     {
         if(GameManager.Instance == null)

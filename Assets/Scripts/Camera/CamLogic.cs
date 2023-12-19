@@ -16,7 +16,7 @@ public class CamLogic : MonoBehaviour
     [SerializeField] private Vector3 rotation;
     [SerializeField] private Vector3 position;
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         switch(GameManager.Instance.gameState)
         {
