@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 1
-  maxSpeed: 400
+  maxSpeed: 60
   minPitch: 0.1
   maxPitch: 1.5
   minVolume: 0.1
@@ -320,9 +320,12 @@ GameObject:
   - component: {fileID: 6907035381744792546}
   - component: {fileID: 3658615075303696610}
   - component: {fileID: 1989117581085906258}
+  - component: {fileID: 8750134003635994654}
+  - component: {fileID: 8414451069359128380}
+  - component: {fileID: 8478098871529977370}
   m_Layer: 6
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -337,8 +340,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 200, z: 1.72}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1021867244399150407}
   - {fileID: 3690813091608343573}
@@ -357,7 +360,7 @@ Rigidbody:
   m_GameObject: {fileID: 3039114256249945450}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -411,27 +414,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5057440665914381713}
-  baseSpeed: 1.666667
-  forwardFactor: 0.33333334
-  maxSpeed: 100
-  minVelocity: 1.6666666
+  baseSpeed: 0.8333335
+  forwardFactor: 0.5
+  maxSpeed: 30
+  minVelocity: 0.8333335
+  gravity: 1
   xRotation: 0
   yRotation: 0
   rotationFactor: 0
   xRotationForce: 30
   yRotationForce: 50
   rotationForceLerpStrenght: 0.7
-  zRotationFactor: 60
+  zRotationFactor: 90
   visuals: {fileID: 8992193000124888556}
   vectorThrust: 300
-  raycastDistance: 3.333333
+  raycastDistance: 1.666667
   raycastHeightStart: 0
-  cloudForce: 0.5
+  cloudForce: 0.0625
   terrainlayer:
     serializedVersion: 2
     m_Bits: 8
-  cloudSkitRotationLerp: 0.4
-  cloudSkitSpeedLerp: 0.4
+  cloudSkitRotationLerp: 0.2
+  cloudSkitSpeedLerp: 0.2
   windVectorSound: {fileID: 5197929475491314743}
 --- !u!114 &1989117581085906258
 MonoBehaviour:
@@ -463,6 +467,56 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &8750134003635994654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3039114256249945450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 166d992cbbd3c614984a9a92879a1817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPosition: {x: 20, y: 0, z: 0}
+  startRotation: {x: 0, y: 0, z: 0}
+  camera: {fileID: 0}
+  rb: {fileID: 5057440665914381713}
+  idealPointInCamera: {x: -10, y: 0, z: 2}
+  beginningTime: 3
+  zRotationFactor: 1
+  visuals: {fileID: 8992193000124888556}
+  beginningVelocity: 2.5
+--- !u!114 &8414451069359128380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3039114256249945450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec981e2646db0343ae28ad57ba368dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreMagnitude: 10
+--- !u!114 &8478098871529977370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3039114256249945450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24ff81ce94b1c747812d9f225f5d46a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  failDistance: 5
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &6579330308184099239
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +685,7 @@ Transform:
   m_GameObject: {fileID: 6737253144317823603}
   serializedVersion: 2
   m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 10, z: -20}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -649,12 +703,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cef513c5b65de6408bf6147f421f360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startYHeight: 0
-  startYHeightLerpStrenght: 0
-  startMovementSpeed: 0
-  player: {fileID: 2726718487830722322}
+  startYHeight: 60
+  startYHeightLerpStrenght: 0.01
+  startMovementSpeed: 0.5
+  player: {fileID: 3039114256249945450}
   rotation: {x: 10, y: 0, z: 0}
-  position: {x: 0, y: 10, z: -20}
+  position: {x: 0, y: 1, z: -1}
 --- !u!1 &7607478212082225962
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,8 +737,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3690813091608343573}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -766,8 +820,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -1, y: -0, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3690813091608343573}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
