@@ -13,7 +13,11 @@ public class Glide : MonoBehaviour
     [SerializeField] private float baseSpeed;
     [SerializeField] private float forwardFactor;
     [SerializeField] private float maxSpeed;
+<<<<<<< Updated upstream
     [SerializeField] private float minVelocity;
+=======
+    [SerializeField] private float gravity;
+>>>>>>> Stashed changes
     private float currentForwardSpeed;
 
     public float xRotation;
@@ -34,6 +38,14 @@ public class Glide : MonoBehaviour
     [SerializeField] private float zRotationFactor = 20f;
     [SerializeField] private GameObject visuals;
 
+    [SerializeField] private float startSpeed;
+
+    
+    [SerializeField] private float stallingStartSpeed;
+    [SerializeField] private float stallingEndSpeed;
+    [SerializeField] private float stallingRotation;
+    [Range(0f,1f)] [SerializeField] private float stallingLerp;
+
     private float lerpedXRotationForce;
     private float lerpedYRotationForce;
     private float zRotation;
@@ -53,10 +65,23 @@ public class Glide : MonoBehaviour
     [Range(0f,1f)]
     [SerializeField] private float cloudSkitSpeedLerp = 0.4f;
 
+<<<<<<< Updated upstream
+=======
+    //windvector
+    [SerializeField] private AudioSource windVectorSound;
+
+    Coroutine isStalling;
+
+>>>>>>> Stashed changes
 
     void Awake()
     {
         playerControlls = new PlayerControlls();
+<<<<<<< Updated upstream
+=======
+        Physics.gravity = Vector3.down * gravity;
+        currentForwardSpeed = startSpeed;
+>>>>>>> Stashed changes
     }
 
     void OnEnable()
@@ -89,33 +114,32 @@ public class Glide : MonoBehaviour
         {
             lerpedXRotationForce = Mathf.Lerp(lerpedXRotationForce, xRotationForce * move.ReadValue<Vector2>().y, rotationForceLerpStrenght);
             lerpedYRotationForce = Mathf.Lerp(lerpedYRotationForce, yRotationForce * move.ReadValue<Vector2>().x, rotationForceLerpStrenght);
-            xRotation += lerpedXRotationForce * Time.deltaTime;
+
+            if(isStalling == null)
+            {
+                xRotation += lerpedXRotationForce * Time.deltaTime;
+            }
             yRotation += lerpedYRotationForce * Time.deltaTime;
+            
         }
 
-        //if player is looking down its positive, if player is looking up its negative
         float mappedPitch = Mathf.Sin(transform.rotation.eulerAngles.x * Mathf.Deg2Rad) * forwardFactor;
 
+        currentForwardSpeed += mappedPitch;           
+        Mathf.Clamp(currentForwardSpeed, 0, maxSpeed);
 
-        if(rb.velocity.magnitude >= minVelocity)
+        //stalling
+        if(currentForwardSpeed <= stallingStartSpeed)
         {
-            currentForwardSpeed += mappedPitch;           
-            Mathf.Clamp(currentForwardSpeed, 0, maxSpeed);
+            isStalling = StartCoroutine(Stalling());
         }
-        else
-        {
-            currentForwardSpeed = 0f;
-        }
+
+        
 
         //force in direction player is looking
         transform.rotation = Quaternion.Euler(xRotation, yRotation,0f);
         rb.AddRelativeForce(Vector3.forward * currentForwardSpeed);
 
-        //minimum force so player always goes forward
-        if( transform.InverseTransformDirection(rb.velocity).z <= minVelocity)
-        {
-            rb.AddRelativeForce(Vector3.forward * minVelocity, ForceMode.VelocityChange);
-        }
 
         //skitting over clouds
         CloudSkit();
@@ -128,7 +152,7 @@ public class Glide : MonoBehaviour
 
         //rotation on z axis
         transform.rotation = Quaternion.Euler(xRotation,yRotation, 0f);
-        zRotation =  transform.InverseTransformVector(rb.velocity).normalized.x * zRotationFactor;
+        zRotation =  transform.InverseTransformDirection(rb.velocity).normalized.x * zRotationFactor;
         visuals.transform.localRotation = Quaternion.Euler(0,0,zRotation);
     }
 
@@ -171,9 +195,26 @@ public class Glide : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + transform.rotation *new Vector3(0,-1,1)*raycastDistance);
     }
 
+    void OnCollisionEnter()
+    {
+        currentForwardSpeed = transform.InverseTransformVector(rb.velocity).z;
+    }
+
     public void WindVector()
     {
         rb.AddForce(transform.forward * vectorThrust, ForceMode.Impulse);
+    }
+
+    private IEnumerator Stalling()
+    {
+        while(currentForwardSpeed <= stallingEndSpeed)
+        {
+            Debug.Log("stalling");
+            xRotation = Mathf.Lerp(xRotation, stallingRotation, stallingLerp);
+            yield return new WaitForFixedUpdate();
+        }
+        isStalling = null;
+        yield return null;
     }
 
 

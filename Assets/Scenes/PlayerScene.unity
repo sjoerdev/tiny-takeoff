@@ -338,6 +338,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8992193000124888556, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
   m_PrefabInstance: {fileID: 1324190965}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!1 &456388093 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3039114256249945450, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
@@ -349,11 +350,26 @@ Rigidbody:
   m_PrefabInstance: {fileID: 1324190965}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &456388099
+=======
+--- !u!114 &348787892 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9059032096849659025, guid: 2399fed1ab18da64ba280fabc643fac9, type: 3}
+  m_PrefabInstance: {fileID: 1336937098}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348787890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &348787894
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 456388093}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -369,6 +385,16 @@ MonoBehaviour:
   beginningLerpFactor: 0.05
   zRotationFactor: 60
   visuals: {fileID: 401009009}
+=======
+  m_GameObject: {fileID: 348787890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2728f7cb24585ac45a3a6780709af696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 348787892}
+  textBeforeScore: 'Score: '
+>>>>>>> Stashed changes
 --- !u!1 &937460635
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +740,7 @@ PrefabInstance:
       value: player
       objectReference: {fileID: 0}
     - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+<<<<<<< Updated upstream
       propertyPath: maxSpeed
       value: 600
       objectReference: {fileID: 0}
@@ -732,6 +759,42 @@ PrefabInstance:
     - target: {fileID: 4871756190358436466, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: startYHeightLerpStrenght
       value: 0.01
+=======
+      propertyPath: startSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: minVelocity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: stallingLerp
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: zRotationFactor
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: stallingEndSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: stallingRotation
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: stallingStartSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750134003635994654, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 1182896811}
+    - target: {fileID: 8750134003635994654, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: beginningVelocity
+      value: 10
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
