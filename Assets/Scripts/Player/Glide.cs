@@ -176,6 +176,7 @@ public class Glide : MonoBehaviour
     public void WindVector()
     {
         rb.AddForce(transform.forward * vectorThrust, ForceMode.Impulse);
+        currentForwardSpeed = transform.InverseTransformDirection(rb.velocity).z;
         windVectorSound.Play();
     }
 
