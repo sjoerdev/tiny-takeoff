@@ -17,6 +17,7 @@ public class EndlessTerrain : MonoBehaviour
     public float scale;
     public int octaves;
 	public int amplitude;
+	public int lod = 2;
 	public GameObject chunkPrefab;
 
 	void Start()
@@ -34,7 +35,7 @@ public class EndlessTerrain : MonoBehaviour
 	{
 		var chunk = Instantiate(chunkPrefab);
 		float[,] heightMap = Noise.GenerateHeightMap(chunkSize, chunkSize, scale, octaves, amplitude, offset);
-		var meshData = MeshGenerator.GenerateTerrainMesh(heightMap, 2);
+		var meshData = MeshGenerator.GenerateTerrainMesh(heightMap, lod);
 		var mesh = meshData.CreateMesh();
 		chunk.GetComponent<MeshFilter>().sharedMesh = mesh;
 		chunk.GetComponent<MeshCollider>().sharedMesh = mesh;
@@ -67,7 +68,7 @@ public class EndlessTerrain : MonoBehaviour
 					}
 				} else 
 				{
-					terrainChunkDictionary.Add(viewedChunkCoord, new TerrainChunk(viewedChunkCoord, chunkSize, transform, gameObject));
+					terrainChunkDictionary.Add(viewedChunkCoord, new TerrainChunk(viewedChunkCoord, chunkSize, transform, gameObject, lod));
 				}
 			}
 		}
@@ -79,9 +80,9 @@ public class EndlessTerrain : MonoBehaviour
 		Vector2 position;
 		Bounds bounds;
 
-		public TerrainChunk(Vector2 coord, int size, Transform parent, GameObject endlessTerrainObject) 
+		public TerrainChunk(Vector2 coord, int size, Transform parent, GameObject endlessTerrainObject, int lod) 
 		{
-			position = coord * size;
+			position = coord * (size - lod);
 			bounds = new Bounds(position,Vector2.one * size);
 			Vector3 positionV3 = new Vector3(position.x, 0, position.y);
 
