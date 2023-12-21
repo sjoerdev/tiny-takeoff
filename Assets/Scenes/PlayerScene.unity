@@ -830,6 +830,10 @@ PrefabInstance:
       propertyPath: rotationForceLerpStrenght
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 4672035589410930032, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 1182896811}
     - target: {fileID: 4871756190358436466, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: player
       value: 
