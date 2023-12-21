@@ -890,7 +890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewer: {fileID: 1182896815}
-  chunkSize: 64
+  chunkSize: 32
   scale: 600
   octaves: 7
   amplitude: 35

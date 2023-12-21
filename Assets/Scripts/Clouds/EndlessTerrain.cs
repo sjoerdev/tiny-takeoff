@@ -34,7 +34,7 @@ public class EndlessTerrain : MonoBehaviour
 	{
 		var chunk = Instantiate(chunkPrefab);
 		float[,] heightMap = Noise.GenerateHeightMap(chunkSize, chunkSize, scale, octaves, amplitude, offset);
-		var meshData = MeshGenerator.GenerateTerrainMesh(heightMap);
+		var meshData = MeshGenerator.GenerateTerrainMesh(heightMap, 2);
 		var mesh = meshData.CreateMesh();
 		chunk.GetComponent<MeshFilter>().sharedMesh = mesh;
 		chunk.GetComponent<MeshCollider>().sharedMesh = mesh;

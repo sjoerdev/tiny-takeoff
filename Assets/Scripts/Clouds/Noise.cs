@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Threading.Tasks;
 
 public static class Noise
 {
@@ -6,7 +7,7 @@ public static class Noise
     {
         float[,] heightMap = new float[height, width];
 
-        for (int y = 0; y < height; y++)
+        Parallel.For(0, height, y =>
         {
             for (int x = 0; x < width; x++)
             {
@@ -17,15 +18,13 @@ public static class Noise
                 for (int i = 0; i < octaves; i++)
                 {
                     value += Simplex.CalcPixel2D(x + (int)offset.x + width / 2, y + (int)offset.y + height / 2, 1 / currentScale) * currentAmplitude;
-                    
-                    // Update amplitude and scale for the next octave
                     currentAmplitude *= 0.5f;
                     currentScale *= 0.5f;
                 }
 
                 heightMap[x, y] = value;
             }
-        }
+        });
 
         return heightMap;
     }
