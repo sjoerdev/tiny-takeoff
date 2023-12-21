@@ -134,6 +134,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c494c7cd1cfc1446b21b14e1651f9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &190546152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 190546154}
+  - component: {fileID: 190546153}
+  m_Layer: 0
+  m_Name: VectorSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &190546153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190546152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5795947edd4af4695fd727ebdaa012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedBoostPool: {fileID: 654083285}
+  spawnInterval: 5
+  spawnHeightOffset: 25
+  raycastHeight: 25
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!4 &190546154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190546152}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &250363413
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d309b2c6cafbca46b097626e4fe315c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 0}
+  objectPrefab: {fileID: 7156913229691150495, guid: 58c4e6d8e6a88a74bb630c59f4b691c9, type: 3}
   poolSize: 10
 --- !u!4 &654083286
 Transform:
@@ -1112,6 +1163,7 @@ MonoBehaviour:
   scale: 600
   octaves: 7
   amplitude: 35
+  lod: 2
   chunkPrefab: {fileID: 2742213663015561995, guid: d4e753ca4d7dc29459582ba962c45d8a, type: 3}
 --- !u!1 &2597883377639179970
 GameObject:
@@ -1123,7 +1175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6036263449983067455}
   - component: {fileID: 1763255764896990893}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Clouds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1302,3 +1354,4 @@ SceneRoots:
   - {fileID: 2124035806}
   - {fileID: 1101886556}
   - {fileID: 654083286}
+  - {fileID: 190546154}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WindVectorSpawner : MonoBehaviour
 {
-    public ObjectPool speedBoostPool;
+    public VectorPool speedBoostPool;
     public float spawnInterval = 5f;
     public float spawnHeightOffset = 2f;
     public float raycastHeight = 10f; // Height from which to start the raycast
