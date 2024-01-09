@@ -1276,7 +1276,7 @@ PrefabInstance:
       objectReference: {fileID: 1376102163}
     - target: {fileID: 3662879390326649973, guid: 8c03efe7c8efc2a41b9a13ff3ef3ef8e, type: 3}
       propertyPath: positionDrag
-      value: 0.07
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3662879390326649973, guid: 8c03efe7c8efc2a41b9a13ff3ef3ef8e, type: 3}
       propertyPath: rotationDrag
