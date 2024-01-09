@@ -1309,6 +1309,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2483468728035945322, guid: 612075213351bc542974a59bcbb14d2a, type: 3}
+      propertyPath: m_Intensity
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4774945940787352295, guid: 612075213351bc542974a59bcbb14d2a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1355,7 +1359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8434083377357394506, guid: 612075213351bc542974a59bcbb14d2a, type: 3}
       propertyPath: timeOfDay
-      value: 233
+      value: 318
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
