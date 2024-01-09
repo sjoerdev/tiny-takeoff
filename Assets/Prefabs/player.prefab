@@ -417,7 +417,7 @@ MonoBehaviour:
   rb: {fileID: 5057440665914381713}
   baseSpeed: 0.8333335
   forwardFactor: 0.5
-  maxSpeed: 60
+  maxSpeed: 100
   gravity: 1
   startStallingSpeed: 8
   endStallingSpeed: 15
@@ -431,7 +431,7 @@ MonoBehaviour:
   visuals: {fileID: 8992193000124888556}
   stallingRotation: 80
   stallingLerp: 0.001
-  vectorThrust: 60
+  vectorThrust: 300
   raycastDistance: 1.666667
   raycastHeightStart: 0
   cloudForce: 0.0625
