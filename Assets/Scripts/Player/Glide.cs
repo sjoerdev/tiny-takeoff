@@ -100,6 +100,10 @@ public class Glide : MonoBehaviour
         }
         if(GameManager.Instance.gameState == GameStates.beginning)
         {
+            //reset player speed when you start
+            currentForwardSpeed = 0;
+            rb.angularVelocity = Vector3.zero;
+            rb.velocity = transform.rotation * Vector3.forward * currentForwardSpeed;
             return;
         }
 
