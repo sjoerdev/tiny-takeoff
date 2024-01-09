@@ -15,6 +15,7 @@ public class Glide : MonoBehaviour
     [SerializeField] private float forwardFactor;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float gravity;
+    [SerializeField] private float speedDecrease;
     private float currentForwardSpeed;
 
     [SerializeField] private float startStallingSpeed;
@@ -129,7 +130,7 @@ public class Glide : MonoBehaviour
         //max velocity
         if(rb.velocity.magnitude > maxSpeed)
         {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
+            rb.velocity -= rb.velocity.normalized * speedDecrease * Time.deltaTime;
         }
 
         //rotation on z axis
