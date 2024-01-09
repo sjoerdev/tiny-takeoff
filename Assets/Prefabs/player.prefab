@@ -414,12 +414,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb432950bd1291946b413fcdcdb7dc88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingSpeed: 10
   rb: {fileID: 5057440665914381713}
   baseSpeed: 0.8333335
   forwardFactor: 0.5
-  maxSpeed: 30
-  minVelocity: 0.8333335
+  maxSpeed: 100
   gravity: 1
+  startStallingSpeed: 8
+  endStallingSpeed: 15
   xRotation: 0
   yRotation: 0
   rotationFactor: 0
@@ -428,6 +430,8 @@ MonoBehaviour:
   rotationForceLerpStrenght: 0.7
   zRotationFactor: 90
   visuals: {fileID: 8992193000124888556}
+  stallingRotation: 80
+  stallingLerp: 0.001
   vectorThrust: 300
   raycastDistance: 1.666667
   raycastHeightStart: 0
@@ -435,8 +439,8 @@ MonoBehaviour:
   terrainlayer:
     serializedVersion: 2
     m_Bits: 8
-  cloudSkitRotationLerp: 0.2
-  cloudSkitSpeedLerp: 0.2
+  cloudSkitRotationLerp: 0.1
+  cloudSkitSpeedLerp: 0.1
   windVectorSound: {fileID: 5197929475491314743}
 --- !u!114 &1989117581085906258
 MonoBehaviour:
