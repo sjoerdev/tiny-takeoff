@@ -108,6 +108,32 @@ public class Glide : MonoBehaviour
             return;
         }
 
+        if(xRotation < 0)
+        {
+            xRotation += 360;
+        }
+        if(yRotation < 0)
+        {
+            yRotation += 360;
+        }
+        if(zRotation < 0)
+        {
+            zRotation += 360;
+        }
+
+        if(xRotation >= 360)
+        {
+            xRotation -= 360;
+        }
+        if(yRotation >= 360)
+        {
+            yRotation -= 360;
+        }
+        if(zRotation >= 360)
+        {
+            zRotation -= 360;
+        }
+
         //if player is looking down its positive, if player is looking up its negative
         float mappedPitch = Mathf.Sin(transform.rotation.eulerAngles.x * Mathf.Deg2Rad) * forwardFactor;
 
@@ -137,8 +163,6 @@ public class Glide : MonoBehaviour
         transform.rotation = Quaternion.Euler(xRotation,yRotation, 0f);
         zRotation =  transform.InverseTransformVector(rb.velocity).normalized.x * zRotationFactor;
         visuals.transform.localRotation = Quaternion.Euler(0,0,zRotation);
-
-        Debug.Log(xRotation);
     }
 
 
@@ -152,7 +176,7 @@ public class Glide : MonoBehaviour
         RaycastHit downHit;
         Vector3 downDir = transform.rotation * Vector3.down;
 
-        
+
         if(Physics.Raycast(transform.position, forwardDir, out forwardHit, rb.velocity.magnitude, terrainlayer))
         {
             if(Physics.Raycast(transform.position, downDir, out downHit, raycastDistance, terrainlayer))
@@ -196,7 +220,12 @@ public class Glide : MonoBehaviour
     {
         while(currentForwardSpeed <= endStallingSpeed)
         {
-            xRotation = Mathf.Lerp(xRotation, stallingRotation, stallingLerp);
+            float stallingRotationFix = stallingRotation;
+            if(xRotation >= 180)
+                stallingRotationFix += 360;
+
+        
+            xRotation = Mathf.Lerp(xRotation, stallingRotationFix, stallingLerp);
             yield return new WaitForFixedUpdate();
         }
         stalling = null;
