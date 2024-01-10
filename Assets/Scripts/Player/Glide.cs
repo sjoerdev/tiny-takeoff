@@ -137,6 +137,8 @@ public class Glide : MonoBehaviour
         transform.rotation = Quaternion.Euler(xRotation,yRotation, 0f);
         zRotation =  transform.InverseTransformVector(rb.velocity).normalized.x * zRotationFactor;
         visuals.transform.localRotation = Quaternion.Euler(0,0,zRotation);
+
+        Debug.Log(xRotation);
     }
 
 
