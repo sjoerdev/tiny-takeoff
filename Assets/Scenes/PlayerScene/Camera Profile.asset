@@ -40,6 +40,28 @@ MonoBehaviour:
   maxNits:
     m_OverrideState: 0
     m_Value: 1000
+--- !u!114 &-6984048547011277466
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: 
+  active: 1
+  lift:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.9675786, z: 0.9731471, w: 0}
+  gamma:
+    m_OverrideState: 1
+    m_Value: {x: 0.99962866, y: 1, z: 0.99351627, w: 0}
+  gain:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.68003863, z: 0.41248214, w: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,6 +78,36 @@ MonoBehaviour:
   - {fileID: -8030326118301699605}
   - {fileID: 9199854351287661953}
   - {fileID: 8512043767924873185}
+  - {fileID: -6984048547011277466}
+  - {fileID: 2278040664564180887}
+--- !u!114 &2278040664564180887
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
+  m_Name: Vignette
+  m_EditorClassIdentifier: 
+  active: 1
+  color:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  center:
+    m_OverrideState: 1
+    m_Value: {x: 0.5, y: 0.5}
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.213
+  smoothness:
+    m_OverrideState: 1
+    m_Value: 0.834
+  rounded:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!114 &8512043767924873185
 MonoBehaviour:
   m_ObjectHideFlags: 3

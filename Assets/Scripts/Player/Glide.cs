@@ -175,7 +175,7 @@ public class Glide : MonoBehaviour
 
         RaycastHit downHit;
         Vector3 downDir = transform.rotation * Vector3.down;
-
+    
 
         if(Physics.Raycast(transform.position, forwardDir, out forwardHit, rb.velocity.magnitude, terrainlayer))
         {
