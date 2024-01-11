@@ -33,6 +33,6 @@ public class ChangeSkyBox : MonoBehaviour
             timePercent *= -1f;
             timePercent += 1f;
         }
-        skyBox.SetFloat("_CubemapTransition", timePercent);
+        skyBox.SetFloat("_CubemapTransition", Mathf.SmoothStep(0,1,timePercent));
     }
 }
