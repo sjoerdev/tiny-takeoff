@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38183603, g: 0.53679156, b: 0.7537393, a: 1}
+  m_IndirectSpecularColor: {r: 0.38241416, g: 0.54345703, b: 0.76541483, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -551,11 +551,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 655499587419071289, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 200
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 655499587419071289, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.72
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 655499587419071289, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -588,6 +588,14 @@ PrefabInstance:
     - target: {fileID: 3039114256249945450, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_Name
       value: player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: vectorThrust
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: speedDecrease
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4672035589410930032, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: camera
