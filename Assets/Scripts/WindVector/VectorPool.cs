@@ -31,6 +31,7 @@ public class VectorPool : MonoBehaviour
 
         GameObject newObj = Instantiate(prefab);
         newObj.SetActive(true);
+        Debug.Log("Spawned");
         return newObj;
     }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3827955, g: 0.5466252, b: 0.77089494, a: 1}
+  m_IndirectSpecularColor: {r: 0.38284218, g: 0.54716295, b: 0.7718379, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -174,8 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pool: {fileID: 654083285}
-  spawnInterval: 25
-  spawnRadius: 500
+  spawnInterval: 10
+  spawnRadius: 1500
   minSpawnDistance: 30
 --- !u!4 &190546154
 Transform:

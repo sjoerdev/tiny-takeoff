@@ -5,10 +5,10 @@ public class WindVectorSpawner : MonoBehaviour
 {
     public VectorPool pool;
     public float spawnInterval = 5f;
-    public float spawnRadius = 1500f; // The radius around the player where islands can spawn
+    public float spawnRadius = 1500f; // The radius around the player where Vectors can spawn
     private float timer;
     private Transform playerTransform;
-    private float spawnHeight = 60;
+    private float spawnHeight = 30;
     public float minSpawnDistance = 30f;
 
     void Start()
@@ -21,12 +21,12 @@ public class WindVectorSpawner : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= spawnInterval)
         {
-            SpawnIsland();
+            SpawnVector();
             timer = 0f;
         }
     }
 
-    private void SpawnIsland()
+    private void SpawnVector()
     {
         if (playerTransform == null) return;
 
@@ -37,6 +37,7 @@ public class WindVectorSpawner : MonoBehaviour
             randomDirection.y = 0; // Maintain the fixed height for Y-axis
 
             spawnPosition = playerTransform.position + randomDirection;
+            pool.prefab.transform.rotation = playerTransform.rotation;
         }
         while (Vector3.Distance(spawnPosition, playerTransform.position) < minSpawnDistance);
 
