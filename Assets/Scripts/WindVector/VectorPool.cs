@@ -4,35 +4,40 @@ using UnityEngine;
 
 public class VectorPool : MonoBehaviour
 {
-    public GameObject objectPrefab;
+    public GameObject prefab;
     public int poolSize = 10;
 
-    private Queue<GameObject> pool = new Queue<GameObject>();
+    private Queue<GameObject> objects = new Queue<GameObject>();
 
     void Start()
     {
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject obj = Instantiate(objectPrefab);
+            GameObject obj = Instantiate(prefab);
             obj.SetActive(false);
-            pool.Enqueue(obj);
+            objects.Enqueue(obj);
         }
     }
 
-    public GameObject GetObject()
+    public GameObject GetVector()
     {
-        if (pool.Count > 0)
+        if (objects.Count > 0)
         {
-            GameObject obj = pool.Dequeue();
+            GameObject obj = objects.Dequeue();
             obj.SetActive(true);
             return obj;
         }
-        return null;
+
+
+        GameObject newObj = Instantiate(prefab);
+        newObj.SetActive(true);
+        return newObj;
     }
 
-    public void ReturnObject(GameObject obj)
+    public void ReturnVector(GameObject obj)
     {
         obj.SetActive(false);
-        pool.Enqueue(obj);
+        objects.Enqueue(obj);
     }
 }
+

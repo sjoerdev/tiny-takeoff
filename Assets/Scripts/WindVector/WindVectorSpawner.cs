@@ -1,55 +1,50 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WindVectorSpawner : MonoBehaviour
 {
-    public VectorPool speedBoostPool;
+    public VectorPool pool;
     public float spawnInterval = 5f;
-    public float spawnHeightOffset = 2f;
-    public float raycastHeight = 10f; // Height from which to start the raycast
-    public LayerMask groundLayer; // Layer mask to identify the ground
+    public float spawnRadius = 1500f; // The radius around the player where islands can spawn
     private float timer;
+    private Transform playerTransform;
+    private float spawnHeight = 60;
+    public float minSpawnDistance = 30f;
+
+    void Start()
+    {
+        playerTransform = GameObject.FindWithTag("Player").transform;
+    }
 
     void Update()
     {
         timer += Time.deltaTime;
-
         if (timer >= spawnInterval)
         {
-            SpawnSpeedBoost();
-            timer = 0;
+            SpawnIsland();
+            timer = 0f;
         }
     }
 
-    void SpawnSpeedBoost()
+    private void SpawnIsland()
     {
-        GameObject speedBoost = speedBoostPool.GetObject();
-        if (speedBoost != null)
+        if (playerTransform == null) return;
+
+        Vector3 spawnPosition;
+        do
         {
-            Vector3 spawnPosition = GetRandomGroundPosition();
-            if (spawnPosition != Vector3.zero)
-            {
-                spawnPosition.y += spawnHeightOffset;
-                speedBoost.transform.position = spawnPosition;
-            }
-            else
-            {
-                // If no ground found, return the object back to the pool
-                speedBoostPool.ReturnObject(speedBoost);
-            }
+            Vector3 randomDirection = Random.insideUnitSphere * spawnRadius;
+            randomDirection.y = 0; // Maintain the fixed height for Y-axis
+
+            spawnPosition = playerTransform.position + randomDirection;
         }
+        while (Vector3.Distance(spawnPosition, playerTransform.position) < minSpawnDistance);
+
+        spawnPosition.y = spawnHeight; // Set the Y-coordinate to the fixed spawn height
+
+        GameObject island = pool.GetVector();
+        island.transform.position = spawnPosition;
     }
 
-    Vector3 GetRandomGroundPosition()
-    {
-        Vector3 origin = new Vector3(Random.Range(-10, 10), raycastHeight, Random.Range(-10, 10));
-        RaycastHit hit;
 
-        if (Physics.Raycast(origin, Vector3.down, out hit, Mathf.Infinity, groundLayer))
-        {
-            return hit.point;
-        }
-        return Vector3.zero;
-    }
 }
