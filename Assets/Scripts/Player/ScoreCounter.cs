@@ -12,8 +12,11 @@ public class ScoreCounter : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        
 
         if(GameManager.Instance.gameState == GameStates.playing){
+            Debug.Log(score, this);
+            Debug.Log(traveledDistance, this);
         traveledDistance += Vector3.Distance(transform.position, previousPosition);
         score = traveledDistance / scoreMagnitude;
         GameManager.Instance.score = score;
@@ -25,6 +28,7 @@ public class ScoreCounter : MonoBehaviour
     {
         Debug.Log("resetting");
         traveledDistance = 0f;
+        
         score = 0f;
         GameManager.Instance.score = 0f;
     }

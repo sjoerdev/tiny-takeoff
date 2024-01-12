@@ -29,10 +29,13 @@ public class UIAnimations : MonoBehaviour
     [SerializeField] private float bottomUIMovedY = 100f;
     private float bottomUINormalY;
 
+    private ScoreCounter scoreCounter;
+
     void Start()
     {
         topUINormalY = topUI.transform.localPosition.y;
         bottomUINormalY= bottomUI.transform.localPosition.y;
+        scoreCounter = FindObjectOfType<ScoreCounter>();
     }
 
     private GameStates previousState;
@@ -118,7 +121,9 @@ public class UIAnimations : MonoBehaviour
         position.y = topUImovedY;
         topUI.transform.localPosition = position;
 
-        GameManager.Instance.score = 0f;
+        scoreCounter.Reset();
+
+
 
         yield return new WaitForSeconds(topUIResetWaitTime);
 
