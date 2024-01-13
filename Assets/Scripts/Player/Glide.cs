@@ -223,7 +223,7 @@ public class Glide : MonoBehaviour
         while(currentForwardSpeed <= endStallingSpeed)
         {
             float stallingRotationFix = stallingRotation;
-            if(xRotation >= 180)
+            if(xRotation >= 270)
                 stallingRotationFix += 360;
 
         
