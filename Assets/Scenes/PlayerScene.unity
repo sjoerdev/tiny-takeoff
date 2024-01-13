@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38284218, g: 0.54716295, b: 0.7718379, a: 1}
+  m_IndirectSpecularColor: {r: 0.37357688, g: 0.4352646, b: 0.5760439, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -587,17 +587,57 @@ PrefabInstance:
       value: player (1)
       objectReference: {fileID: 0}
     - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: maxSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: cloudForce
+      value: 0.0625
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: vectorThrust
       value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: speedDecrease
-      value: 30
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: startingSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: raycastDistance
+      value: 3.333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: endStallingSpeed
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: cloudSkitSpeedLerp
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: startStallingSpeed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658615075303696610, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: cloudSkitRotationLerp
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 4672035589410930032, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 1182896811}
+    - target: {fileID: 4672035589410930032, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: playerDrag
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672035589410930032, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
+      propertyPath: beginningVelocity
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 5414002361948849275, guid: 57e8dee7fd4a5604d93895ac3f6752e4, type: 3}
       propertyPath: m_Time
       value: 0.4

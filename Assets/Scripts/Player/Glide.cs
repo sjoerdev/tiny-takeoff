@@ -154,9 +154,11 @@ public class Glide : MonoBehaviour
         CloudSkit();
 
         //max velocity
-        if(rb.velocity.magnitude > maxSpeed)
+        if(currentForwardSpeed > maxSpeed)
         {
-            rb.velocity -= rb.velocity.normalized * speedDecrease * Time.deltaTime;
+            Debug.Log(currentForwardSpeed + ", " + rb.velocity.magnitude);
+            rb.velocity -= transform.rotation*Vector3.back*speedDecrease*Time.fixedDeltaTime;
+            currentForwardSpeed -= speedDecrease * Time.fixedDeltaTime;
         }
 
         //rotation on z axis
@@ -207,7 +209,7 @@ public class Glide : MonoBehaviour
     public void WindVector()
     {
         rb.AddForce(transform.forward * vectorThrust, ForceMode.Impulse);
-        currentForwardSpeed = transform.InverseTransformDirection(rb.velocity).z;
+        currentForwardSpeed += vectorThrust;
         windVectorSound.Play();
     }
 
@@ -230,5 +232,10 @@ public class Glide : MonoBehaviour
         }
         stalling = null;
         yield return null;
+    }
+
+    public void SetSpeed(float _speed)
+    {
+        currentForwardSpeed = _speed;
     }
 }

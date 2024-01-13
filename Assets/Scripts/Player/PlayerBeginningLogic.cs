@@ -19,6 +19,7 @@ public class PlayerBeginningLogic : MonoBehaviour
     [SerializeField] private float beginningVelocity;
     private Glide glide;
     private Vector3 currentVelocity;
+    [SerializeField] private float playerDrag;
 
     bool playing;
 
@@ -51,9 +52,9 @@ public class PlayerBeginningLogic : MonoBehaviour
 //                    UnityEngine.Debug.Log("beginningVelocity");
                     playing = true;
                     rb.useGravity = true;
-                    rb.drag = 1f;
+                    rb.drag = playerDrag;
                     //Vector3 velocity = transform.InverseTransformDirection(rb.velocity);
-                    rb.velocity = transform.rotation * (Vector3.forward * beginningVelocity);
+                    glide.SetSpeed(beginningVelocity);
                 }
                 break;
         }
