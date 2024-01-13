@@ -11,9 +11,12 @@ public class UI : MonoBehaviour
     [Range(0f,1f)]
     [SerializeField] private float pauseTimeScale;
 
+    [SerializeField] private GameObject quitText;
+
     void Awake()
     {
         playerControlls = new PlayerControlls();
+        quitText.SetActive(false);
     }
 
     void OnEnable()
@@ -36,12 +39,15 @@ public class UI : MonoBehaviour
                 Debug.Log("We paused");
                 Time.timeScale = pauseTimeScale;
                 GameManager.Instance.gameState = GameStates.paused;
+                quitText.SetActive(true);
             }
             else if(GameManager.Instance.gameState == GameStates.paused)
             {
                 Debug.Log("We play");
                 Time.timeScale = 1f;
                 GameManager.Instance.gameState = GameStates.playing;
+                
+                quitText?.SetActive(false);
             }
     }
 
